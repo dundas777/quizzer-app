@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scores - Quizzer</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="header-placeholder"></div>
+    <div class="container">
+        <h1>Your Scores</h1>
+        <div id="scores-content"></div>
+        <a href="index.html" class="button">Back</a>
+    </div>
+    <script type="module">
+    import { getLoggedInUser, formatDateFancy, formatTimeFancy, capitalise } from './utils.js';
+    const user = getLoggedInUser();
+    const scoresContent = document.getElementById('scores-content');
+    let scores = [];
+    const scoresString = localStorage.getItem('scores');
+    if (scoresString) {
+        try {
+            scores = JSON.parse(scoresString);
+        } catch {
+            scores = [];
+        }
+    }
+    // Filter scores for logged in user
+    const userScores = user ? scores.filter(s => s.email === user.email) : [];
+    if (!userScores.length) {
+        scoresContent.innerHTML = '<p>No scores recorded yet</p>';
+    } else {
+        let html = '<table class="scores-table"><thead><tr>' +
+            '<th>Date</th><th>Time</th><th>Category</th><th>Questions</th><th>Score</th><th>Percent</th><th>Rating</th></tr></thead><tbody>';
+        userScores.forEach(score => {
+            const percent = (score.score / score.numberOfQuestions) * 100;
+            let rating = '';
+            if (percent <= 25) {
+                rating = '😢'; // sad
+            } else if (percent > 75) {
+                rating = '😄'; // happy
+            } else {
+                rating = '😐'; // medium
+            }
+            html += `<tr>
+                <td>${formatDateFancy(score.dateOfScore)}</td>
+                <td>${formatTimeFancy(score.dateOfScore)}</td>
+                <td>${capitalise(score.category)}</td>
+                <td>${score.numberOfQuestions}</td>
+                <td>${score.score}</td>
+                <td>${Math.round(percent)}%</td>
+                <td>${rating}</td>
+            </tr>`;
+        });
+        html += '</tbody></table>';
+        scoresContent.innerHTML = html;
+    }
+    </script>
+    <script src="include-header.js"></script>
+</body>
+</html>

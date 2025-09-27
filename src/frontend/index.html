@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multiple Choice Quiz</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="app">
+        <div id="header-placeholder"></div>
+        <div id="category-container" class="container">
+            <h1>Welcome to the Quiz!</h1>
+            <h2>Select a category</h2>
+            <div id="quiz-category" class="option-list">
+                <input id="geography" type="radio" name="category" value="geography"><label for="geography" class="radio-text">Geography</label><br>
+                <input id="history" type="radio" name="category" value="history"><label for="history" class="radio-text">History</label><br>
+                <input id="science" type="radio" name="category" value="science"><label for="science" class="radio-text">Science</label><br>
+            </div>
+            <h2>Select how many questions to answer</h2>
+            <div id="number-of-questions" class="option-list">
+                <input id="num3" type="radio" name="number" value="3"><label for="num3" class="radio-text">3</label><br>
+                <input id="num5" type="radio" name="number" value="5"><label for="num5" class="radio-text">5</label><br>
+                <input id="num10" type="radio" name="number" value="10"><label for="num10" class="radio-text">10</label><br>
+            </div>
+            <br>
+            <button id="start-quiz" class="button">Start Quiz</button>
+        </div>
+        <div id="quiz-container" style="display: none;" class="container">
+            <h2 id="quiz-question"></h2>
+            <div id="quiz-answers"></div>
+            <br>
+            <div id="quiz-incorrect-answer" style="color: red; display: none;">Incorrect, try again!</div><br>
+            <button id="quiz-submit-button" class="button">Submit</button>
+            <button id="quiz-next-button" style="display: none;" class="button">Next</button>
+        </div>
+        <div id="score-container" style="display: none;" class="container">
+            <h2>Your Final Score: <span id="final-score"></span></h2>
+            <button id="restart-button" class="button">Restart Quiz</button>
+        </div>
+    </div>
+    <script src="main.js" type="module"></script>
+    <script src="include-header.js"></script>
+</body>
+</html>

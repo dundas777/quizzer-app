@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Quizzer</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="header-placeholder"></div>
+    <div class="container">
+        <h1>Login</h1>
+        <form id="login-form">
+            <div style="margin-bottom: 1.2em;">
+                <label for="email" style="display: inline-block; width: 100px;">Email:</label>
+                <input type="email" id="email" name="email" required><br>
+            </div>
+            <div style="margin-bottom: 2.2em;">
+                <label for="password" style="display: inline-block; width: 100px;">Password:</label>
+                <input type="password" id="password" name="password" required><br>
+            </div>
+            <div id="login-error" class="error-message" style="display: none;">error message</div>
+            <button type="submit" class="button">Login</button>
+            <a href="register.html" id="register-button" class="linkButtonLight">Register</a>
+        </form>
+    </div>
+    <script>
+    document.getElementById('login-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+        const errorDiv = document.getElementById('login-error');
+        errorDiv.style.display = 'none';
+        Promise.all([
+            fetch(`http://localhost:5000/api/users?email=${encodeURIComponent(email)}&password=${encodeURIComponent(password)}`),
+            fetch(`http://localhost:5000/api/scores?email=${encodeURIComponent(email)}`)
+        ])
+        .then(async ([userResponse, scoresResponse]) => {
+            let errorMessage = '';
+            if (scoresResponse.status === 200) {
+                const scores = await scoresResponse.json();
+                localStorage.setItem('scores', JSON.stringify(scores));
+            } else {
+                if (scoresResponse.status !== 200) {
+                    errorMessage = 'An unexpected error occurred retrieving scores.';
+                }
+            }
+
+            if (userResponse.status === 200) {
+                // alert('Login successful!');
+                const user = await userResponse.json();
+                localStorage.setItem('user', JSON.stringify(user));
+            } else if (userResponse.status === 401) {
+                // alert('Login failed: Invalid user or password');
+                errorMessage = 'Invalid user or password';
+            } else {
+                // alert('Login failed: An unexpected error occurred');
+                errorMessage = 'An unexpected error occurred logging in.';
+            }
+
+            if (errorMessage === '') {
+                document.body.style.cursor = 'wait';
+                setTimeout(function () {
+                    window.location.href = 'index.html';
+                    document.body.style.cursor = 'default';
+                }, 2000);
+                // window.location.href = 'index.html';
+            } else {
+                errorDiv.textContent = errorMessage;
+                errorDiv.style.display = 'block';
+                errorDiv.style.marginBottom = '1.2em';
+            }
+        })
+        .catch(() => {
+            errorDiv.textContent = 'Unable to connect to server.';
+            errorDiv.style.display = 'block';
+            errorDiv.style.marginBottom = '1.2em';
+        });
+    });
+
+    </script>
+    <script src="include-header.js"></script>
+</body>
+</html>
