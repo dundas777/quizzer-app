@@ -14,7 +14,7 @@ app.use(express.json());
 
 // e.g. http://localhost:5000/api/hello
 app.get('/api/hello', (req: Request, res: Response) => {
-  res.json({ message: 'Hello from Express API!' });
+  res.json({ message: 'Hello from the Quizzer API!' });
 });
 
 // ------------------------------------
