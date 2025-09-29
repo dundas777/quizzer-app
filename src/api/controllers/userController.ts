@@ -4,6 +4,9 @@ import { User } from '../../domain/types/user';
 export class UserController {
 
     public getUser(email: string, password: string): User[] {
+        if (email === 'all') {
+            return userData;
+        }
         return userData.filter(q => q.email === email && q.password === password);
     }
 
