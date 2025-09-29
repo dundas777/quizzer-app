@@ -13,27 +13,27 @@
         <form id="register-form">
             <div style="margin-bottom: 1.2em;">
                 <label for="firstName" style="display: inline-block; width: 120px;">First Name:</label>
-                <input type="text" id="firstName" name="firstName" required><br>
+                <input type="text" id="firstName" name="firstName" required><sup>*</sup><br>
             </div>
             <div style="margin-bottom: 1.2em;">
                 <label for="lastName" style="display: inline-block; width: 120px;">Last Name:</label>
-                <input type="text" id="lastName" name="lastName" required><br>
+                <input type="text" id="lastName" name="lastName" required><sup>*</sup><br>
             </div>
             <div style="margin-bottom: 1.2em;">
                 <label for="email" style="display: inline-block; width: 120px;">Email:</label>
-                <input type="email" id="email" name="email" required><br>
+                <input type="email" id="email" name="email" autocomplete="new-password" required><sup>*</sup><br>
             </div>
             <div style="margin-bottom: 1.2em;">
                 <label for="password" style="display: inline-block; width: 120px;">Password:</label>
-                <input type="password" id="password" name="password" required><br>
+                <input type="password" id="password" name="password" autocomplete="new-password" required><sup>*</sup><br>
             </div>
             <div style="margin-bottom: 1.2em;">
                 <label for="dateOfBirth" style="display: inline-block; width: 120px;">Date of Birth:</label>
-                <input type="date" id="dateOfBirth" name="dateOfBirth" required><br>
+                <input type="date" id="dateOfBirth" name="dateOfBirth"><br>
             </div>
             <div style="margin-bottom: 1.2em;">
                 <label for="country" style="display: inline-block; width: 120px;">Country:</label>
-                <select id="country" name="country" required>
+                <select id="country" name="country">
                     <option value="">-- Select Country --</option>
                     <option value="Afghanistan">Afghanistan</option>
                     <option value="Albania">Albania</option>
@@ -231,6 +231,7 @@
                     <option value="Zimbabwe">Zimbabwe</option>
                 </select><br>
             </div>
+            <div><sup>*</sup> = Required Field</div><br>
             <button type="submit" class="button">Register</button>
         </form>
         <div id="register-error" class="error-message" style="display: none;"></div>
