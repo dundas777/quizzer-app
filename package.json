@@ -8,7 +8,7 @@
     "build": "tsc",
     "dev": "ts-node-dev src/app.ts",
     "web": "ts-node src/app.ts",
-    "api": "ts-node api/server.ts"
+    "api": "ts-node src/api/server.ts"
   },
   "dependencies": {
     "cors": "^2.8.5",
