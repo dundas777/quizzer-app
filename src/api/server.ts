@@ -21,16 +21,11 @@ app.get('/api/hello', (req: Request, res: Response) => {
 //              Questions
 // ------------------------------------
 
-// e.g. http://localhost:5000/api/questions
+// e.g. http://localhost:5000/api/questions?subject=science&numberOfQuestions=5
 app.get('/api/questions', (req: Request, res: Response) => {
   const quizController = new QuizController();
-  res.json(quizController.getQuestions());
-});
-
-// e.g. http://localhost:5000/api/questions/science
-app.get('/api/questions/:category', (req: Request<{ category: string }>, res: Response) => {
-  const quizController = new QuizController();
-  res.json(quizController.getQuestionsForCategory(req.params.category));
+  res.json(quizController.getQuestions(req.query.subject as string | undefined,
+                                       req.query.numberOfQuestions ? parseInt(req.query.numberOfQuestions as string) : -1));
 });
 
 // ------------------------------------

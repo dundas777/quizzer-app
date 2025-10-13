@@ -1,5 +1,5 @@
 export interface Question {
-    category: string;
+    subject: string;
     question: string;
     options: string[];
     answer: string;
