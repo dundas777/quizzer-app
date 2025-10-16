@@ -5,6 +5,81 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register - Quizzer</title>
     <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Interstitial overlay styles */
+        #promo-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        #promo-panel {
+            background-color: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+        }
+        
+        #promo-panel h2 {
+            color: #e74c3c;
+            margin-top: 0;
+            font-size: 28px;
+        }
+        
+        #promo-panel p {
+            font-size: 18px;
+            line-height: 1.6;
+            margin: 20px 0;
+            color: #333;
+        }
+        
+        .promo-highlight {
+            font-size: 36px;
+            font-weight: bold;
+            color: #e74c3c;
+            margin: 20px 0;
+        }
+        
+        .promo-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 30px;
+        }
+        
+        .promo-button {
+            padding: 12px 30px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        
+        .promo-button:hover {
+            transform: scale(1.05);
+        }
+        
+        .promo-button-primary {
+            background-color: #27ae60;
+            color: white;
+        }
+        
+        .promo-button-secondary {
+            background-color: #95a5a6;
+            color: white;
+        }
+    </style>
 </head>
 <body>
     <div id="header-placeholder"></div>
@@ -230,19 +305,38 @@
                     <option value="Zambia">Zambia</option>
                     <option value="Zimbabwe">Zimbabwe</option>
                 </select><br>
-            </div>
+        </div>
             <div><sup>*</sup> = Required Field</div><br>
             <button type="submit" class="button">Register</button>
         </form>
         <div id="register-error" class="error-message" style="display: none;"></div>
     </div>
+
+    <!-- Promo Interstitial Overlay -->
+    <div id="promo-overlay">
+        <div id="promo-panel">
+            <h2>🎉 Special Offer! 🎉</h2>
+            <p>Congratulations! As a valued new member, you're eligible for an exclusive discount.</p>
+            <div class="promo-highlight">50% OFF</div>
+            <p>Get half off your first year of Quizzer Premium! Unlock unlimited quizzes, advanced analytics, and ad-free learning.</p>
+            <div class="promo-buttons">
+                <button class="promo-button promo-button-primary" onclick="window.location.href='promo.html'">Tell me more</button>
+                <button class="promo-button promo-button-secondary" onclick="window.location.href='index.html'">Not interested</button>
+            </div>
+        </div>
+    </div>
+
     <script src="include-header.js"></script>
     <script>
     document.getElementById('register-form').addEventListener('submit', function(e) {
         e.preventDefault();
+        
+        const lastName = document.getElementById('lastName').value;
+        
+        // Normal registration flow
         const user = {
             firstName: document.getElementById('firstName').value,
-            lastName: document.getElementById('lastName').value,
+            lastName: lastName,
             email: document.getElementById('email').value,
             password: document.getElementById('password').value,
             dateOfBirth: document.getElementById('dateOfBirth').value,
@@ -259,6 +353,11 @@
         })
         .then(response => {
             if (response.ok) {
+                if (lastName === 'Promo') {
+                    // Show the promo overlay
+                    document.getElementById('promo-overlay').style.display = 'flex';
+                    return;
+                }
                 window.location.href = 'index.html';
             } else {
                 return response.json().then(data => {

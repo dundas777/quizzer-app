@@ -79,7 +79,7 @@ function fetchQuestions(category, numberOfQuestions) {
 
     setTimeout(function () {
         currentCategory = category;
-        fetch(`${apiUrl}/${category}`)
+        fetch(`${apiUrl}?subject=${category}&numberOfQuestions=${numberOfQuestions}`)
             .then(response => response.json())
             .then(data => {
                 console.log('Data received from API');
