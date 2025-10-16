@@ -16,18 +16,26 @@ fetch("header.html")
             const headerSalutation = document.getElementById('header-logout-user');
             const headerLoginLink = document.getElementById('header-login-link');
             const headerScoresLink = document.getElementById('header-user-scores');
+            const adminSiteLink = document.getElementById('header-admin-site');
             headerSalutation.innerHTML = `Logout: ${user.firstName}`;
             headerSalutation.style.display = 'inline';
             headerScoresLink.style.display = 'inline';
             headerLoginLink.style.display = 'none';
+            if (user.isAdmin) {
+                adminSiteLink.style.display = 'inline';
+            } else {
+                adminSiteLink.style.display = 'none';
+            }
         } else {
             // alert('User NOT found in localStorage');
             const headerSalutation = document.getElementById('header-logout-user');
             const headerLoginLink = document.getElementById('header-login-link');
             const headerScoresLink = document.getElementById('header-user-scores');
+            const adminSiteLink = document.getElementById('header-admin-site');
             headerSalutation.style.display = 'none';
             headerScoresLink.style.display = 'none';
             headerLoginLink.style.display = 'inline';
+            adminSiteLink.style.display = 'none';
         }
 
         document.getElementById('header-logout-user').addEventListener('click', () => {
