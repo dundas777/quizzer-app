@@ -8,7 +8,8 @@ export const userData: User[] = [
         password: "Password123!",
         dateOfBirth: new Date("1990-01-01"),
         country: "USA",
-        isAdmin: true
+        isAdmin: true,
+        failedLogins: 0
     },
     {
         firstName: "Alice",
@@ -17,7 +18,8 @@ export const userData: User[] = [
         password: "Password123!",
         dateOfBirth: new Date("1985-03-15"),
         country: "UK",
-        isAdmin: false
+        isAdmin: false,
+		failedLogins: 0
     },
     {
         firstName: "Carlos",
@@ -26,7 +28,8 @@ export const userData: User[] = [
         password: "Password123!",
         dateOfBirth: new Date("1992-07-09"),
         country: "Mexico",
-        isAdmin: false
+        isAdmin: false,
+		failedLogins: 0
     },
     {
         firstName: "Fatima",
@@ -35,7 +38,8 @@ export const userData: User[] = [
         password: "Password123!",
         dateOfBirth: new Date("1995-11-30"),
         country: "Pakistan",
-        isAdmin: false
+        isAdmin: false,
+		failedLogins: 0
     },
     {
         firstName: "Liam",
@@ -44,7 +48,8 @@ export const userData: User[] = [
         password: "Password123!",
         dateOfBirth: new Date("1988-06-22"),
         country: "Ireland",
-        isAdmin: false
+        isAdmin: false,
+		failedLogins: 0
     },
     {
         firstName: "Sophie",
@@ -53,7 +58,8 @@ export const userData: User[] = [
         password: "Password123!",
         dateOfBirth: new Date("1993-04-12"),
         country: "France",
-        isAdmin: false
+        isAdmin: false,
+		failedLogins: 0
     },
     {
         firstName: "Chen",
@@ -62,7 +68,8 @@ export const userData: User[] = [
         password: "Password123!",
         dateOfBirth: new Date("1991-08-03"),
         country: "China",
-        isAdmin: false
+        isAdmin: false,
+		failedLogins: 0
     },
     {
         firstName: "Emma",
@@ -71,7 +78,8 @@ export const userData: User[] = [
         password: "Password123!",
         dateOfBirth: new Date("1987-12-19"),
         country: "Sweden",
-        isAdmin: false
+        isAdmin: false,
+		failedLogins: 0
     },
     {
         firstName: "David",
@@ -80,7 +88,8 @@ export const userData: User[] = [
         password: "Password123!",
         dateOfBirth: new Date("1994-02-28"),
         country: "Vietnam",
-        isAdmin: false
+        isAdmin: false,
+		failedLogins: 0
     },
     {
         firstName: "Maya",
@@ -89,6 +98,7 @@ export const userData: User[] = [
         password: "Password123!",
         dateOfBirth: new Date("1996-10-05"),
         country: "India",
-        isAdmin: false
+        isAdmin: false,
+		failedLogins: 0
     }
 ];

@@ -6,4 +6,5 @@ export interface User {
     dateOfBirth: Date;
     country: string;
     isAdmin: boolean;
+    failedLogins: number;
 }
