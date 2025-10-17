@@ -1,15 +1,12 @@
 import { capitalise, getLoggedInUser, getScores } from './utils.js';
-const apiUrl = 'http://localhost:5000/api/questions';
+import { questionsApiEndpoint } from './constants.js';
+
 let currentCategory = '';
 let currentQuestionIndex = 0;
 let score = 0;
-//let allQuestions = [];
 let questions = [];
 
 let categoryContainer;
-let geographyButton;
-let historyButton;
-let scienceButton;
 let startQuizButton;
 
 let quizContainer;
@@ -79,7 +76,7 @@ function fetchQuestions(category, numberOfQuestions) {
 
     setTimeout(function () {
         currentCategory = category;
-        fetch(`${apiUrl}?subject=${category}&numberOfQuestions=${numberOfQuestions}`)
+        fetch(`${questionsApiEndpoint}?subject=${category}&numberOfQuestions=${numberOfQuestions}`)
             .then(response => response.json())
             .then(data => {
                 console.log('Data received from API');

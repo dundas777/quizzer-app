@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Question - Quizzer Admin</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="header-placeholder"></div>
+    <div class="container">
+        <h1>Edit Question</h1>
+        <form id="edit-question-form">
+            <div style="margin-bottom: 1.2em;">
+                <label for="id" style="display: inline-block; width: 120px;">Id:</label>
+                <input type="text" id="id" readonly />
+                <br />
+            </div>
+            <div style="margin-bottom: 1.2em;">
+                <label for="subjectSelect" style="display: inline-block; width: 120px;">Subject:</label>
+                <select id="subjectSelect">
+                </select>
+                <br />
+            </div>
+            <div style="margin-bottom: 1.2em;">
+                <label for="question" style="display: inline-block; width: 120px;">Question:</label>
+                <input type="text" id="question" style="display: inline-block; width: 400px;" required />
+                <br />
+            </div>
+            <div style="margin-bottom: 1.2em;">
+                <label for="password" style="display: inline-block; width: 120px;">Answer 1:</label>
+                <input type="text" id="answer1" name="password" required />
+                <input id="isAnswer1Correct" type="radio" name="isAnswerCorrect" />
+                <br />
+            </div>
+            <div style="margin-bottom: 1.2em;">
+                <label for="password" style="display: inline-block; width: 120px;">Answer 2:</label>
+                <input type="text" id="answer2" name="password" required />
+                <input id="isAnswer2Correct" type="radio" name="isAnswerCorrect" />
+                <br />
+            </div>
+            <div style="margin-bottom: 1.2em;">
+                <label for="password" style="display: inline-block; width: 120px;">Answer 3:</label>
+                <input type="text" id="answer3" name="password" required />
+                <input id="isAnswer3Correct" type="radio" name="isAnswerCorrect" />
+                <br />
+            </div>
+            <div style="margin-bottom: 1.2em;">
+                <label for="password" style="display: inline-block; width: 120px;">Answer 4:</label>
+                <input type="text" id="answer4" name="password" required />
+                <input id="isAnswer4Correct" type="radio" name="isAnswerCorrect" />
+                <br />
+            </div>
+            <div>
+                <input id="isAnswerCorrectGuide" type="radio" name="isAnswerCorrectGuide" />
+                <span style="font-size: 0.9em; color: gray;">(Select the radio button next to the correct answer)</span>
+            </div>
+            <br />
+            <button id="save-button" type="submit" class="button">Save</button>
+            <button id="cancel-button" type="button" class="linkButtonLight">Cancel</button>
+            <br />
+        </form>
+    </div>
+
+    <script src="include-header.js"></script>
+    <script src="admin-check.js"></script>
+    <script type="module">
+
+        import { questionApiEndpoint, subjectsApiEndpoint } from './constants.js';
+        import { capitalise } from './utils.js';
+        const urlParams = new URLSearchParams(window.location.search);
+        const idParam = urlParams.get('id');
+        await fetch(`${subjectsApiEndpoint}`)
+            .then(response => response.json())
+            .then(data => {
+                console.log('Fetched subjects:', data);
+                const subjects = data;
+                const subjectSelect = document.getElementById('subjectSelect');
+                subjects.forEach((subject, index) => {
+                    const selectOption = document.createElement('option');
+                    selectOption.value = subject;
+                    selectOption.textContent = capitalise(subject);
+                    subjectSelect.appendChild(selectOption);
+                });
+            });
+
+        await fetch(`${questionApiEndpoint}?id=${idParam}`)
+            .then(response => response.json())
+            .then(data => {
+                const question = data;
+                document.getElementById('id').value = question.id;
+                // document.getElementById('subject').value = question.subject;
+                document.getElementById('question').value = question.question;
+                document.getElementById('answer1').value = question.options[0];
+                document.getElementById('answer2').value = question.options[1];
+                document.getElementById('answer3').value = question.options[2];
+                document.getElementById('answer4').value = question.options[3];
+                document.getElementById(`isAnswer${question.answerIdx + 1}Correct`).checked = true;
+            });
+
+        document.getElementById('cancel-button').addEventListener('click', function(e) {
+            alert('[Cancel] button clicked');
+            window.location.href = 'admin-question-list.html';
+        });
+
+        document.getElementById('edit-question-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const lastName = document.getElementById('lastName').value;
+            
+            // Normal registration flow
+            const user = {
+                firstName: document.getElementById('firstName').value,
+                lastName: lastName,
+                email: document.getElementById('email').value,
+                password: document.getElementById('password').value,
+                dateOfBirth: document.getElementById('dateOfBirth').value,
+                country: document.getElementById('country').value,
+                isAdmin: false
+            };
+            localStorage.setItem('user', JSON.stringify(user));
+            fetch('http://localhost:5000/api/users', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(user)
+            })
+            .then(response => {
+                if (response.ok) {
+                    if (lastName === 'Promo') {
+                        // Show the promo overlay
+                        document.getElementById('promo-overlay').style.display = 'flex';
+                        return;
+                    }
+                    window.location.href = 'index.html';
+                } else {
+                    return response.json().then(data => {
+                        throw new Error(data.error || 'Registration failed');
+                    });
+                }
+            })
+            .catch(error => {
+                const errorDiv = document.getElementById('register-error');
+                errorDiv.textContent = error.message;
+                errorDiv.style.display = 'block';
+            });
+        });
+    </script>
+</body>
+</html>

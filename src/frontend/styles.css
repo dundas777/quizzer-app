@@ -1,5 +1,5 @@
 /* Stylish table for scores and other data */
-.scores-table {
+.quizzer-table {
     width: 100%;
     border-collapse: collapse;
     margin: 1.5rem 0;
@@ -9,12 +9,12 @@
     overflow: hidden;
 }
 
-.scores-table th, .scores-table td {
+.quizzer-table th, .quizzer-table td {
     padding: 0.75rem 1.2rem;
     text-align: left;
 }
 
-.scores-table th {
+.quizzer-table th {
     background: linear-gradient(90deg, #6366f1 0%, #60a5fa 100%);
     color: #fff;
     font-weight: 600;
@@ -22,19 +22,19 @@
     border-bottom: 2px solid #e0e7ff;
 }
 
-.scores-table tr {
+.quizzer-table tr {
     transition: background 0.2s;
 }
 
-.scores-table tbody tr:nth-child(even) {
+.quizzer-table tbody tr:nth-child(even) {
     background: #f3f4f6;
 }
 
-.scores-table tbody tr:hover {
+.quizzer-table tbody tr:hover {
     background: #e0e7ff;
 }
 
-.scores-table td {
+.quizzer-table td {
     border-bottom: 1px solid #e5e7eb;
 }
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
@@ -157,6 +157,15 @@ header {
 .error-message {
     color: #f43f5e;
     margin-top: 1rem;
+}
+
+.right {
+    text-align: right;
+    float: right;
+}
+
+input[readonly] {
+    background-color: lightgray;
 }
 
 /* --------------------------------------------------------------------------*/

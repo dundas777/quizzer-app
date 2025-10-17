@@ -39,8 +39,19 @@ export class QuizController {
             return subjectQuestions;
         }
     }
+ 
+    public getQuestion(id?: string): Question | undefined {
+        if (!id) {
+            throw new Error("A question ID must be specified");
+        }
+        const questionId = parseInt(id);
+        if (isNaN(questionId) || questionId <= 0) {
+            throw new Error("Invalid question ID");
+        }
+        return questionData.find(q => q.id === questionId);
+    } 
 
-    public getCategories(): string[] {
+    public getSubjects(): string[] {
         return Array.from(new Set(questionData.map(q => q.subject)));
     }
 

@@ -28,6 +28,19 @@ app.get('/api/questions', (req: Request, res: Response) => {
                                        req.query.numberOfQuestions ? parseInt(req.query.numberOfQuestions as string) : -1));
 });
 
+// e.g. http://localhost:5000/api/question?id=3
+app.get('/api/question', (req: Request, res: Response) => {
+  const quizController = new QuizController();
+  res.json(quizController.getQuestion(req.query.id as string | undefined));
+});
+
+// e.g. http://localhost:5000/api/subjects
+app.get('/api/subjects', (req: Request, res: Response) => {
+  const quizController = new QuizController();
+  res.json(quizController.getSubjects());
+});
+
+
 // ------------------------------------
 //              Users
 // ------------------------------------
