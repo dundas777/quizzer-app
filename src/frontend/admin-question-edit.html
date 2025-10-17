@@ -91,61 +91,66 @@
                 document.getElementById('id').value = question.id;
                 // document.getElementById('subject').value = question.subject;
                 document.getElementById('question').value = question.question;
-                document.getElementById('answer1').value = question.options[0];
-                document.getElementById('answer2').value = question.options[1];
-                document.getElementById('answer3').value = question.options[2];
-                document.getElementById('answer4').value = question.options[3];
-                document.getElementById(`isAnswer${question.answerIdx + 1}Correct`).checked = true;
+                document.getElementById('answer1').value = question.answers[0];
+                document.getElementById('answer2').value = question.answers[1];
+                document.getElementById('answer3').value = question.answers[2];
+                document.getElementById('answer4').value = question.answers[3];
+                document.getElementById(`isAnswer${question.correctAnswerIdx + 1}Correct`).checked = true;
             });
 
         document.getElementById('cancel-button').addEventListener('click', function(e) {
-            alert('[Cancel] button clicked');
+            // alert('[Cancel] button clicked');
             window.location.href = 'admin-question-list.html';
         });
 
-        document.getElementById('edit-question-form').addEventListener('submit', function(e) {
+        // submit handler to update question via PUT
+        document.getElementById('edit-question-form').addEventListener('submit', async function (e) {
             e.preventDefault();
-            
-            const lastName = document.getElementById('lastName').value;
-            
-            // Normal registration flow
-            const user = {
-                firstName: document.getElementById('firstName').value,
-                lastName: lastName,
-                email: document.getElementById('email').value,
-                password: document.getElementById('password').value,
-                dateOfBirth: document.getElementById('dateOfBirth').value,
-                country: document.getElementById('country').value,
-                isAdmin: false
+            const id = document.getElementById('id').value;
+            const subject = document.getElementById('subjectSelect').value;
+            const questionText = document.getElementById('question').value;
+            const answers = [
+                document.getElementById('answer1').value,
+                document.getElementById('answer2').value,
+                document.getElementById('answer3').value,
+                document.getElementById('answer4').value
+            ];
+            const correctAnswerIndex = [
+                document.getElementById('isAnswer1Correct').checked,
+                document.getElementById('isAnswer2Correct').checked,
+                document.getElementById('isAnswer3Correct').checked,
+                document.getElementById('isAnswer4Correct').checked
+            ].findIndex(v => v === true);
+
+            const payload = {
+                id: parseInt(id, 10),
+                subject: subject,
+                question: questionText,
+                answers: answers,
+                correctAnswerIdx: correctAnswerIndex >= 0 ? correctAnswerIndex : 0
             };
-            localStorage.setItem('user', JSON.stringify(user));
-            fetch('http://localhost:5000/api/users', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(user)
-            })
-            .then(response => {
-                if (response.ok) {
-                    if (lastName === 'Promo') {
-                        // Show the promo overlay
-                        document.getElementById('promo-overlay').style.display = 'flex';
-                        return;
-                    }
-                    window.location.href = 'index.html';
+
+            try {
+                const resp = await fetch(questionApiEndpoint, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                if (resp.ok) {
+                    alert('Question updated successfully');
+                    window.location.href = 'admin-question-list.html';
                 } else {
-                    return response.json().then(data => {
-                        throw new Error(data.error || 'Registration failed');
-                    });
+                    const text = await resp.text();
+                    alert('Failed to update question: ' + text);
                 }
-            })
-            .catch(error => {
-                const errorDiv = document.getElementById('register-error');
-                errorDiv.textContent = error.message;
-                errorDiv.style.display = 'block';
-            });
+            } catch (err) {
+                console.error('Error updating question:', err);
+                alert('Error updating question. See console for details.');
+            }
         });
+
+
     </script>
 </body>
 </html>

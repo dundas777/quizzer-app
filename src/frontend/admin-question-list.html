@@ -49,7 +49,7 @@
                         <td>${question.id}</td>
                         <td>${capitalise(question.subject)}</td>
                         <td>${question.question}</td>
-                        <td>${question.answer}</td>
+                        <td>${question.answers[question.correctAnswerIdx]}</td>
                         <td>
                             <a href="admin-question-edit.html?id=${question.id}">Edit</a>
                             <a href="admin-question-delete.html?id=${question.id}">Delete</a>

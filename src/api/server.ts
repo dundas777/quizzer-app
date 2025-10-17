@@ -1,7 +1,7 @@
 const express = require('express');
 import cors from 'cors';
 import type { Request, Response } from 'express';
-import { QuizController } from './controllers/quizController';
+import { QuestionController } from './controllers/questionController';
 import { UserController } from './controllers/userController';
 import { ScoreController } from './controllers/scoreController';
 
@@ -23,21 +23,27 @@ app.get('/api/hello', (req: Request, res: Response) => {
 
 // e.g. http://localhost:5000/api/questions?subject=science&numberOfQuestions=5
 app.get('/api/questions', (req: Request, res: Response) => {
-  const quizController = new QuizController();
-  res.json(quizController.getQuestions(req.query.subject as string | undefined,
+  const questionController = new QuestionController();
+  res.json(questionController.getQuestions(req.query.subject as string | undefined,
                                        req.query.numberOfQuestions ? parseInt(req.query.numberOfQuestions as string) : -1));
 });
 
 // e.g. http://localhost:5000/api/question?id=3
+app.put('/api/question', (req: Request, res: Response) => {
+  const questionController = new QuestionController();
+  res.json(questionController.updateQuestion(req.body));
+});
+
+// e.g. http://localhost:5000/api/question?id=3
 app.get('/api/question', (req: Request, res: Response) => {
-  const quizController = new QuizController();
-  res.json(quizController.getQuestion(req.query.id as string | undefined));
+  const questionController = new QuestionController();
+  res.json(questionController.getQuestion(req.query.id as string | undefined));
 });
 
 // e.g. http://localhost:5000/api/subjects
 app.get('/api/subjects', (req: Request, res: Response) => {
-  const quizController = new QuizController();
-  res.json(quizController.getSubjects());
+  const questionController = new QuestionController();
+  res.json(questionController.getSubjects());
 });
 
 

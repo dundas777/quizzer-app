@@ -1,7 +1,7 @@
 import { Question } from '../../domain/types/question';
 import { questionData } from '../data/questions';
 
-export class QuizController {
+export class QuestionController {
 
     public getQuestions(subject?: string, numberOfQuestions?: number): Question[] {
         if (!subject) {
@@ -49,7 +49,29 @@ export class QuizController {
             throw new Error("Invalid question ID");
         }
         return questionData.find(q => q.id === questionId);
-    } 
+    }
+
+    public updateQuestion(updatedQuestion: Question): Question {
+        if (!updatedQuestion || !updatedQuestion.id) {
+            throw new Error("A valid question with an ID must be provided for update");
+        }
+
+        // Check incoming question "id" is a number
+        if (typeof updatedQuestion.id !== 'number') {
+            throw new Error(`Updated question id must be a number`);
+        }
+        if (isNaN(updatedQuestion.id) || updatedQuestion.id <= 0) {
+            throw new Error(`Invalid question ID: ${updatedQuestion.id}`);
+        }
+
+        const index = questionData.findIndex(q => q.id === updatedQuestion.id);
+        if (index === -1) {
+            throw new Error(`Question with ID ${updatedQuestion.id} not found`);
+        }
+
+        questionData[index] = updatedQuestion;
+        return updatedQuestion;
+    }
 
     public getSubjects(): string[] {
         return Array.from(new Set(questionData.map(q => q.subject)));

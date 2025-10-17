@@ -118,8 +118,8 @@ function showQuestion() {
     quizQuestion.innerText = question.question;
     quizAnswers.innerHTML = '';
 
-    // Add options for each answer
-    question.options.forEach((option, index) => {
+    // Add html option for each answer
+    question.answers.forEach((option, index) => {
         const radio = document.createElement('input');
         radio.id = 'answer' + index;
         radio.type = 'radio';
@@ -157,7 +157,7 @@ function showQuestion() {
 
 function checkAnswer(selectedIndex) {
     const question = questions[currentQuestionIndex];
-    if (selectedIndex === question.answerIdx) {
+    if (selectedIndex === question.correctAnswerIdx) {
         score++;
         currentQuestionIndex++;
         if (currentQuestionIndex < questions.length) {
@@ -167,7 +167,7 @@ function checkAnswer(selectedIndex) {
         }
     } else {
         quizIncorrectAnswer.style.display = 'block';
-        quizIncorrectAnswer.innerText = `Incorrect! The correct answer was: ${question.options[question.answerIdx]}`;
+        quizIncorrectAnswer.innerText = `Incorrect! The correct answer was: ${question.answers[question.correctAnswerIdx]}`;
         quizSubmitButton.style.display = 'none';
         quizNextButton.style.display = 'block';
     }
