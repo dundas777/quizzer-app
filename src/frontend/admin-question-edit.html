@@ -66,10 +66,10 @@
     <script src="admin-check.js"></script>
     <script type="module">
 
-        import { questionApiEndpoint, subjectsApiEndpoint } from './constants.js';
+        import { questionsApiEndpoint, subjectsApiEndpoint } from './constants.js';
         import { capitalise } from './utils.js';
         const urlParams = new URLSearchParams(window.location.search);
-        const idParam = urlParams.get('id');
+        const questionId = urlParams.get('id');
         await fetch(`${subjectsApiEndpoint}`)
             .then(response => response.json())
             .then(data => {
@@ -84,7 +84,7 @@
                 });
             });
 
-        await fetch(`${questionApiEndpoint}?id=${idParam}`)
+        await fetch(`${questionsApiEndpoint}/${questionId}`)
             .then(response => response.json())
             .then(data => {
                 const question = data;
@@ -131,7 +131,7 @@
             };
 
             try {
-                const resp = await fetch(questionApiEndpoint, {
+                const resp = await fetch(questionsApiEndpoint, {
                     method: 'PUT',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(payload)

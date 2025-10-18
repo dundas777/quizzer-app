@@ -44,17 +44,17 @@
 
                 let html = '<table class="quizzer-table"><thead><tr>' +
                     '<th>Id</th><th>Subject</th><th>Question</th><th>Answer</th><th>Action</th></tr></thead><tbody>';
-                questions.forEach(question => {
-                    html += `<tr>
-                        <td>${question.id}</td>
-                        <td>${capitalise(question.subject)}</td>
-                        <td>${question.question}</td>
-                        <td>${question.answers[question.correctAnswerIdx]}</td>
-                        <td>
-                            <a href="admin-question-edit.html?id=${question.id}">Edit</a>
-                            <a href="admin-question-delete.html?id=${question.id}">Delete</a>
-                        </td>
-                    </tr>`;
+                    questions.forEach(question => {
+                        html += `<tr>
+                            <td>${question.id}</td>
+                            <td>${capitalise(question.subject)}</td>
+                            <td>${question.question}</td>
+                            <td>${question.answers[question.correctAnswerIdx]}</td>
+                            <td>
+                                <button class="button" type="button" onclick="window.location.href='admin-question-edit.html?id=${question.id}'">Edit</button>
+                                <button class="linkButtonLight delete-question" data-id="${question.id}" type="button">Delete</button>
+                            </td>
+                        </tr>`;
                 });
                 html += '</tbody></table>';
                 questionListContent.innerHTML = html;
@@ -66,6 +66,35 @@
 
         // initial load
         loadQuestionsForSubject(quizSubjectSelect.value);
+
+        // delegated handler for delete buttons
+        questionListContent.addEventListener('click', async function (e) {
+            const target = e.target;
+            if (target && target.classList && target.classList.contains('delete-question')) {
+                const id = target.getAttribute('data-id');
+                if (!id) return;
+                const confirmed = window.confirm('Are you sure you want to delete question ID ' + id + '?');
+                if (!confirmed) return;
+
+                try {
+                    const resp = await fetch(`${questionsApiEndpoint}`, {
+                        method: 'DELETE',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ id: parseInt(id, 10) })
+                    });
+                    if (resp.ok) {
+                        // reload the list for the current subject
+                        loadQuestionsForSubject(quizSubjectSelect.value);
+                    } else {
+                        const text = await resp.text();
+                        alert('Failed to delete question: ' + text);
+                    }
+                } catch (err) {
+                    console.error('Error deleting question:', err);
+                    alert('Error deleting question. See console for details.');
+                }
+            }
+        });
 
         // reload when user changes subject
         quizSubjectSelect.addEventListener('change', function () {

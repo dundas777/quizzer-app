@@ -25,19 +25,34 @@ app.get('/api/hello', (req: Request, res: Response) => {
 app.get('/api/questions', (req: Request, res: Response) => {
   const questionController = new QuestionController();
   res.json(questionController.getQuestions(req.query.subject as string | undefined,
-                                       req.query.numberOfQuestions ? parseInt(req.query.numberOfQuestions as string) : -1));
+                      req.query.numberOfQuestions ? parseInt(req.query.numberOfQuestions as string) : -1));
 });
 
-// e.g. http://localhost:5000/api/question?id=3
-app.put('/api/question', (req: Request, res: Response) => {
+// e.g. http://localhost:5000/api/questions/3
+app.get('/api/questions/:id', (req: Request, res: Response) => {
+  const questionController = new QuestionController();
+  const { id } = req.params; // id is a string | undefined
+  console.log('id param:', id);
+  const questionId = parseInt(id, 10);
+  res.json(questionController.getQuestion(questionId));
+});
+
+// e.g. http://localhost:5000/api/questions
+app.put('/api/questions', (req: Request, res: Response) => {
   const questionController = new QuestionController();
   res.json(questionController.updateQuestion(req.body));
 });
 
-// e.g. http://localhost:5000/api/question?id=3
-app.get('/api/question', (req: Request, res: Response) => {
+// e.g. http://localhost:5000/api/questions
+app.post('/api/questions', (req: Request, res: Response) => {
   const questionController = new QuestionController();
-  res.json(questionController.getQuestion(req.query.id as string | undefined));
+  res.json(questionController.addQuestion(req.body));
+});
+
+// e.g. http://localhost:5000/api/questions
+app.delete('/api/questions', (req: Request, res: Response) => {
+  const questionController = new QuestionController();
+  res.json(questionController.deleteQuestion(req.body.id));
 });
 
 // e.g. http://localhost:5000/api/subjects

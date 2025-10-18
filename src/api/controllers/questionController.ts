@@ -40,15 +40,11 @@ export class QuestionController {
         }
     }
  
-    public getQuestion(id?: string): Question | undefined {
-        if (!id) {
-            throw new Error("A question ID must be specified");
-        }
-        const questionId = parseInt(id);
-        if (isNaN(questionId) || questionId <= 0) {
+    public getQuestion(id: number): Question | undefined {
+        if (id <= 0) {
             throw new Error("Invalid question ID");
         }
-        return questionData.find(q => q.id === questionId);
+        return questionData.find(q => q.id === id);
     }
 
     public updateQuestion(updatedQuestion: Question): Question {
@@ -71,6 +67,33 @@ export class QuestionController {
 
         questionData[index] = updatedQuestion;
         return updatedQuestion;
+    }
+
+    public deleteQuestion(id: number): { message: string } {
+        if (!id || typeof id !== 'number' || isNaN(id) || id <= 0) {
+            throw new Error("A valid question ID must be provided for deletion");
+        }
+
+        const index = questionData.findIndex(q => q.id === id);
+        if (index === -1) {
+            throw new Error(`Question with ID ${id} not found`);
+        }
+
+        questionData.splice(index, 1);
+        return { message: `Question with ID ${id} has been deleted` };
+    }
+
+    public addQuestion(newQuestion: Question): Question {
+        if (!newQuestion) {
+            throw new Error("A valid question must be provided for addition");
+        }
+
+        // Assign a new unique ID
+        const newId = questionData.length > 0 ? Math.max(...questionData.map(q => q.id)) + 1 : 1;
+        newQuestion.id = newId;
+
+        questionData.push(newQuestion);
+        return newQuestion;
     }
 
     public getSubjects(): string[] {
