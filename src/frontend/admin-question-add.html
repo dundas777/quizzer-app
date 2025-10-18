@@ -3,19 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit Question - Quizzer Admin</title>
+    <title>Add Question - Quizzer Admin</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div id="header-placeholder"></div>
     <div class="container">
-        <h1>Edit Question</h1>
-        <form id="edit-question-form">
-            <div style="margin-bottom: 1.2em;">
-                <label for="id" style="display: inline-block; width: 120px;">Id:</label>
-                <input type="text" id="id" readonly />
-                <br />
-            </div>
+        <h1>Add New Question</h1>
+        <form id="add-question-form">
             <div style="margin-bottom: 1.2em;">
                 <label for="subjectSelect" style="display: inline-block; width: 120px;">Subject:</label>
                 <select id="subjectSelect">
@@ -30,7 +25,7 @@
             <div style="margin-bottom: 1.2em;">
                 <label for="password" style="display: inline-block; width: 120px;">Answer 1:</label>
                 <input type="text" id="answer1" name="password" required />
-                <input id="isAnswer1Correct" type="radio" name="isAnswerCorrect" />
+                <input id="isAnswer1Correct" type="radio" name="isAnswerCorrect" required />
                 <br />
             </div>
             <div style="margin-bottom: 1.2em;">
@@ -86,40 +81,14 @@
                 });
             });
 
-        // load question details
-        await fetch(`${questionsApiEndpoint}/${questionId}`)
-            .then(response => response.json())
-            .then(data => {
-                const question = data;
-                document.getElementById('id').value = question.id;
-                // set subject select to the question's subject (exact match, then case-insensitive fallback)
-                const subjectSelect = document.getElementById('subjectSelect');
-                if (subjectSelect) {
-                    const exact = Array.from(subjectSelect.options).find(o => o.value === question.subject);
-                    if (exact) {
-                        subjectSelect.value = exact.value;
-                    } else {
-                        const ci = Array.from(subjectSelect.options).find(o => (o.value || '').toLowerCase() === (question.subject || '').toLowerCase());
-                        if (ci) subjectSelect.value = ci.value;
-                    }
-                }
-                document.getElementById('question').value = question.question;
-                document.getElementById('answer1').value = question.answers[0];
-                document.getElementById('answer2').value = question.answers[1];
-                document.getElementById('answer3').value = question.answers[2];
-                document.getElementById('answer4').value = question.answers[3];
-                document.getElementById(`isAnswer${question.correctAnswerIdx + 1}Correct`).checked = true;
-            });
-
         // cancel button handler
         document.getElementById('cancel-button').addEventListener('click', function(e) {
             window.location.href = 'admin-question-list.html';
         });
 
-        // submit button handler to save data
-        document.getElementById('edit-question-form').addEventListener('submit', async function (e) {
+        // submit button handler to create new question
+        document.getElementById('add-question-form').addEventListener('submit', async function (e) {
             e.preventDefault();
-            const id = document.getElementById('id').value;
             const subject = document.getElementById('subjectSelect').value;
             const questionText = document.getElementById('question').value;
             const answers = [
@@ -136,7 +105,6 @@
             ].findIndex(v => v === true);
 
             const payload = {
-                id: parseInt(id, 10),
                 subject: subject,
                 question: questionText,
                 answers: answers,
@@ -145,21 +113,21 @@
 
             try {
                 const resp = await fetch(questionsApiEndpoint, {
-                    method: 'PUT',
+                    method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(payload)
                 });
 
                 if (resp.ok) {
-                    alert('Question updated successfully');
+                    alert('Question added successfully');
                     window.location.href = 'admin-question-list.html';
                 } else {
                     const text = await resp.text();
-                    alert('Failed to update question: ' + text);
+                    alert('Failed to add question: ' + text);
                 }
             } catch (err) {
-                console.error('Error updating question:', err);
-                alert('Error updating question. See console for details.');
+                console.error('Error adding question:', err);
+                alert('Error adding question. See console for details.');
             }
         });
 

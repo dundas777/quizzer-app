@@ -662,7 +662,7 @@ export const questionData: Question[] = [
     {
         id: 95,
         subject: "history",
-        question: "Who was the famous female pharaoh of ancient Egypt?",
+        question: "Who was the greatest female pharaoh of ancient Egypt?",
         answers: ["Nefertiti", "Cleopatra", "Hatshepsut", "Isis"],
         correctAnswerIdx: 2
     },
