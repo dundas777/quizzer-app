@@ -44,17 +44,17 @@
 
                 let html = '<table class="quizzer-table"><thead><tr>' +
                     '<th>Id</th><th>Subject</th><th>Question</th><th>Answer</th><th>Action</th></tr></thead><tbody>';
-                    questions.forEach(question => {
-                        html += `<tr>
-                            <td>${question.id}</td>
-                            <td>${capitalise(question.subject)}</td>
-                            <td>${question.question}</td>
-                            <td>${question.answers[question.correctAnswerIdx]}</td>
-                            <td>
-                                <button class="button" type="button" onclick="window.location.href='admin-question-edit.html?id=${question.id}'">Edit</button>
-                                <button class="linkButtonLight delete-question" data-id="${question.id}" type="button">Delete</button>
-                            </td>
-                        </tr>`;
+                questions.forEach(question => {
+                    html += `<tr>
+                        <td>${question.id}</td>
+                        <td>${capitalise(question.subject)}</td>
+                        <td>${question.question}</td>
+                        <td>${question.answers[question.correctAnswerIdx]}</td>
+                        <td>
+                            <button class="button" type="button" onclick="window.location.href='admin-question-edit.html?id=${question.id}'">Edit</button>
+                            <button class="linkButtonLight delete-question" data-id="${question.id}" type="button">Delete</button>
+                        </td>
+                    </tr>`;
                 });
                 html += '</tbody></table>';
                 questionListContent.innerHTML = html;

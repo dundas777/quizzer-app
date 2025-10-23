@@ -7,7 +7,7 @@ export const userData: User[] = [
         email: "john.smith@test.com",
         password: "Password123!",
         dateOfBirth: new Date("1990-01-01"),
-        country: "USA",
+        country: "United States",
         isAdmin: true,
         failedLogins: 0
     },
@@ -17,7 +17,7 @@ export const userData: User[] = [
         email: "alice.johnson@test.com",
         password: "Password123!",
         dateOfBirth: new Date("1985-03-15"),
-        country: "UK",
+        country: "United Kingdom",
         isAdmin: false,
 		failedLogins: 0
     },

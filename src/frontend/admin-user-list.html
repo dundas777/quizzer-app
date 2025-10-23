@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User List - Quizzer Admin</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="header-placeholder"></div>
+    <div class="container">
+        <h1>Users</h1>
+        <p style="margin-bottom: 4.2em;">
+            <a href="admin-user-add.html" class="button right">Add User</a>
+        </p>
+        <p>
+            <div id="user-list-content"></div>
+        </p>
+        <a href="admin.html" class="button">Back</a>
+    </div>
+    <script src="admin-check.js"></script>
+    <script type="module">
+        import { capitalise } from './utils.js';
+        import { usersApiEndpoint } from './constants.js';
+
+        const userListContent = document.getElementById('user-list-content');
+
+        async function loadUsers() {
+            try {
+                const response = await fetch(usersApiEndpoint);
+                const users = await response.json();
+                console.log('Fetched users:', users.length);
+
+                if (users.length === 0) {
+                    userListContent.innerHTML = '<p>No users found</p>';
+                    return;
+                }
+                
+                let html = '<table class="quizzer-table"><thead><tr>' +
+                    '<th>First name</th><th>Last name</th><th>Email</th><th>Action</th></tr></thead><tbody>';
+                users.forEach(user => {
+                    html += `<tr>
+                        <td>${user.firstName}</td>
+                        <td>${user.lastName}</td>
+                        <td>${user.email}</td>
+                        <td>
+                            <button class="button" type="button" onclick="window.location.href='admin-user-edit.html?email=${user.email}'">Edit</button>
+                            <button class="linkButtonLight delete-user" data-id="${user.email}" type="button">Delete</button>
+                        </td>
+                    </tr>`;
+                });
+                html += '</tbody></table>';
+                userListContent.innerHTML = html;
+
+            } catch (err) {
+                console.error('Error loading users:', err);
+                userListContent.innerHTML = '<p>Unable to load users.</p>';
+            }
+        }
+
+        // initial load
+        loadUsers();
+
+        // delegated handler for delete buttons
+        userListContent.addEventListener('click', async function (e) {
+            const target = e.target;
+            if (target && target.classList && target.classList.contains('delete-user')) {
+                const email = target.getAttribute('data-id');
+                if (!email) return;
+                const confirmed = window.confirm('Are you sure you want to delete user email ' + email + '?');
+                if (!confirmed) return;
+
+                try {
+                    const resp = await fetch(`${usersApiEndpoint}`, {
+                        method: 'DELETE',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ email })
+                    });
+                    if (resp.ok) {
+                        // reload the list for the users
+                        loadUsers();
+                    } else {
+                        const text = await resp.text();
+                        alert('Failed to delete user: ' + text);
+                    }
+                } catch (err) {
+                    console.error('Error deleting user:', err);
+                    alert('Error deleting user. See console for details.');
+                }
+           }
+        });
+    </script>
+    <script src="include-header.js"></script>
+</body>
+</html>

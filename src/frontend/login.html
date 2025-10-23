@@ -32,7 +32,7 @@
         const errorDiv = document.getElementById('login-error');
         errorDiv.style.display = 'none';
         Promise.all([
-            fetch(`http://localhost:5000/api/users?email=${encodeURIComponent(email)}&password=${encodeURIComponent(password)}`),
+            fetch(`http://localhost:5000/api/users/${encodeURIComponent(email)}/${encodeURIComponent(password)}`),
             fetch(`http://localhost:5000/api/scores?email=${encodeURIComponent(email)}`)
         ])
         .then(async ([userResponse, scoresResponse]) => {
@@ -50,6 +50,7 @@
                 // alert('Login successful!');
                 const user = await userResponse.json();
                 localStorage.setItem('user', JSON.stringify(user));
+                // alert(`Logged in user: ${JSON.stringify(user)}`);
             } else if (userResponse.status === 401) {
                 // alert('Login failed: Invalid user or password');
                 errorMessage = 'Invalid user or password';

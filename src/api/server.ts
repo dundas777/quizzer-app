@@ -66,21 +66,39 @@ app.get('/api/subjects', (req: Request, res: Response) => {
 //              Users
 // ------------------------------------
 
-// e.g. http://localhost:5000/api/user?email=john.smith@test.com&password=Password123!
-app.get('/api/users', (req: Request, res: Response) => {
-  const { email, password } = req.query;
-  const userController = new UserController();
-  if (email === 'all') {
-    return res.json(userController.getUsers());
-  }
+// e.g. http://localhost:5000/api/users/john.smith@test.com/Password123!
+app.get('/api/users/:email/:password', (req: Request, res: Response) => {
+  const { email, password } = req.params;
   if (!email || !password) {
     return res.status(400).json({ error: 'Email and password are required.' });
   }
-  const users = userController.getUser(email as string, password as string);
-  if (users.length === 0) {
+
+  const userController = new UserController();
+  const users = userController.getUser(email, password);
+  if (!users || users.length === 0) {
     return res.status(401).json({ error: 'Unauthorized' });
   }
   res.json(users[0]);
+});
+
+app.get('/api/users/:email', (req: Request, res: Response) => {
+  const { email } = req.params;
+  if (!email) {
+    return res.status(400).json({ error: 'Email is required.' });
+  }
+
+  const userController = new UserController();
+  const user = userController.getUserByEmail(email);
+  if (!user) {
+    return res.status(401).json({ error: 'Unauthorized' });
+  }
+  res.json(user);
+});
+
+app.get('/api/users', (req: Request, res: Response) => {
+  const userController = new UserController();
+  const users = userController.getUsers();
+  res.json(users);
 });
 
 // add user from registration
@@ -88,10 +106,34 @@ app.post('/api/users', (req: Request, res: Response) => {
   const userController = new UserController();
   const user = req.body;
   if (!user || !user.email || !user.password) {
-    return res.status(400).json({ error: 'Invalid user data.' });
+    return res.status(400).json({ error: 'Invalid user post data.' });
   } 
   userController.addUser(user);
   res.status(201).json({ message: 'User added successfully.' }); 
+});
+
+app.put('/api/users/:email', (req: Request, res: Response) => {
+  const userController = new UserController();
+  const user = req.body;
+
+  if (!user || !user.email || !user.password) {
+    return res.status(400).json({ error: 'Invalid user data attempting to update user details.' });
+  }
+
+  userController.updateUser(user);
+  res.status(200).json({ message: 'User updated successfully.' });
+});
+
+app.delete('/api/users', (req: Request, res: Response) => {
+  const userController = new UserController();
+  const { email } = req.body;
+
+  if (!email) {
+    return res.status(400).json({ error: 'Email is required.' });
+  }
+
+  userController.deleteUser(email);
+  res.status(200).json({ message: 'User deleted successfully.' });
 });
 
 // ------------------------------------
