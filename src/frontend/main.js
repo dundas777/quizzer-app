@@ -13,6 +13,7 @@ let quizContainer;
 let quizQuestion;
 let quizAnswers;
 let quizIncorrectAnswer;
+let quizCorrectAnswer;
 let quizSubmitButton;
 let quizNextButton;
 
@@ -29,6 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
     quizQuestion = document.getElementById('quiz-question');
     quizAnswers = document.getElementById('quiz-answers');
     quizIncorrectAnswer = document.getElementById('quiz-incorrect-answer');
+    quizCorrectAnswer = document.getElementById('quiz-correct-answer');
     quizSubmitButton = document.getElementById('quiz-submit-button');
     quizNextButton = document.getElementById('quiz-next-button');
 
@@ -147,6 +149,7 @@ function showQuestion() {
     };
 
     quizNextButton.onclick = () => {
+        quizCorrectAnswer.style.display = 'none';
         quizIncorrectAnswer.style.display = 'none';
         quizIncorrectAnswer.innerText = `Incorrect!`;
         quizSubmitButton.style.display = 'block';
@@ -159,15 +162,14 @@ function checkAnswer(selectedIndex) {
     const question = questions[currentQuestionIndex];
     if (selectedIndex === question.correctAnswerIdx) {
         score++;
-        currentQuestionIndex++;
-        if (currentQuestionIndex < questions.length) {
-            showQuestion();
-        } else {
-            showScore();
-        }
+        quizCorrectAnswer.style.display = 'block';
+        quizIncorrectAnswer.style.display = 'none';
+        quizSubmitButton.style.display = 'none';
+        quizNextButton.style.display = 'block';
     } else {
         quizIncorrectAnswer.style.display = 'block';
         quizIncorrectAnswer.innerText = `Incorrect! The correct answer was: ${question.answers[question.correctAnswerIdx]}`;
+        quizCorrectAnswer.style.display = 'none';
         quizSubmitButton.style.display = 'none';
         quizNextButton.style.display = 'block';
     }

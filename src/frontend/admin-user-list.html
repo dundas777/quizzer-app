@@ -37,12 +37,13 @@
                 }
                 
                 let html = '<table class="quizzer-table"><thead><tr>' +
-                    '<th>First name</th><th>Last name</th><th>Email</th><th>Admin?</th><th>Action</th></tr></thead><tbody>';
+                    '<th>First name</th><th>Last name</th><th>Email</th><th>Failed Logins</th><th>Admin?</th><th>Action</th></tr></thead><tbody>';
                 users.forEach(user => {
                     html += `<tr>
                         <td>${user.firstName}</td>
                         <td>${user.lastName}</td>
                         <td>${user.email}</td>
+                        <td>${user.failedLogins}</td>
                         <td>${user.isAdmin ? 'Yes' : '-'}</td>
                         <td>
                             <button class="button" type="button" onclick="window.location.href='admin-user-edit.html?email=${user.email}'">Edit</button>

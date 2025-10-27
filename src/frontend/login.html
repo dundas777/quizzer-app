@@ -24,61 +24,110 @@
             <a href="register.html" id="register-button" class="linkButtonLight">Register</a>
         </form>
     </div>
-    <script>
-    document.getElementById('login-form').addEventListener('submit', function(e) {
-        e.preventDefault();
-        const email = document.getElementById('email').value;
-        const password = document.getElementById('password').value;
-        const errorDiv = document.getElementById('login-error');
-        errorDiv.style.display = 'none';
-        Promise.all([
-            fetch(`http://localhost:5000/api/users/${encodeURIComponent(email)}/${encodeURIComponent(password)}`),
-            fetch(`http://localhost:5000/api/scores?email=${encodeURIComponent(email)}`)
-        ])
-        .then(async ([userResponse, scoresResponse]) => {
+    <script type="module">
+        import { loginApiEndpoint, scoresApiEndpoint, usersApiEndpoint } from './constants.js';
+        import { MAX_FAILED_LOGINS } from './constants.js';
+
+        document.getElementById('login-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const errorDiv = document.getElementById('login-error');
+            let user = null;
+            let scores = null;
             let errorMessage = '';
-            if (scoresResponse.status === 200) {
-                const scores = await scoresResponse.json();
-                localStorage.setItem('scores', JSON.stringify(scores));
-            } else {
-                if (scoresResponse.status !== 200) {
-                    errorMessage = 'An unexpected error occurred retrieving scores.';
+            errorDiv.style.display = 'none';
+
+            const loginResponse = await fetch(`${loginApiEndpoint}`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, password })
+                });
+            const scoresResponse = await fetch(`${scoresApiEndpoint}?email=${encodeURIComponent(email)}`);
+            const userResponse = await fetch(`${usersApiEndpoint}/${encodeURIComponent(email)}`);
+
+            // check failed login attempts
+            if (userResponse.status === 200) {
+                user = await userResponse.json();
+                if (user.failedLogins >= MAX_FAILED_LOGINS) {
+                    errorMessage = 'Account locked due to too many failed login attempts.';
                 }
             }
 
-            if (userResponse.status === 200) {
-                // alert('Login successful!');
-                const user = await userResponse.json();
-                localStorage.setItem('user', JSON.stringify(user));
-                // alert(`Logged in user: ${JSON.stringify(user)}`);
-            } else if (userResponse.status === 401) {
-                // alert('Login failed: Invalid user or password');
-                errorMessage = 'Invalid user or password';
-            } else {
-                // alert('Login failed: An unexpected error occurred');
-                errorMessage = 'An unexpected error occurred logging in.';
+            if (errorMessage === '') {
+
+                if (loginResponse.status === 200) { 
+                    // Fetch user scores
+                    if (scoresResponse.status === 200) {
+                        scores = await scoresResponse.json();
+                    } else {
+                        errorMessage = 'An unexpected error occurred retrieving user scores.';
+                    }
+                } else if (loginResponse.status === 401) {
+                    // alert('Login failed: Invalid user or password');
+                    // alert(`userResponse status: ${userResponse.status}`);
+                    errorMessage = 'Invalid user or password';
+                    // Check for account lockout
+                    if (userResponse.status === 200) {
+                        user.failedLogins++;
+                        // Update user failed login attempts in the database
+                        // alert('Updating failed login attempts for user');
+                        const updateFailureCount = await fetch(`http://localhost:5000/api/users/${encodeURIComponent(user.email)}`, {
+                            method: 'PUT',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify(user)
+                        });
+                        if (user.failedLogins === MAX_FAILED_LOGINS - 1) {
+                            errorMessage = 'Invalid user or password. You have one attempt left before your account is locked.';
+                        }
+                        // alert(`updateFailureCount status: ${updateFailureCount.status}`);
+                        if (updateFailureCount.status !== 200) {
+                            errorMessage = 'An unexpected error occurred updating failed login attempts.';
+                        }
+                        if (user.failedLogins >= MAX_FAILED_LOGINS) {
+                            errorMessage = 'Account locked due to too many failed login attempts.';
+                        }
+                    } else {
+                        errorMessage = 'User details could not be retrieved.';
+                    }
+                } else {
+                    alert('Login failed: An unexpected error occurred with status: ' + loginResponse.status);
+                    errorMessage = 'An unexpected error occurred logging in.';
+                }
             }
 
             if (errorMessage === '') {
+                if (user) {
+                    localStorage.setItem('user', JSON.stringify(user));
+                }
+                if (scores) {
+                    localStorage.setItem('scores', JSON.stringify(scores));
+                }
+                if (user.failedLogins > 0) {
+                    // Reset failed login attempts on successful login
+                    user.failedLogins = 0;
+                    await fetch(`http://localhost:5000/api/users/${encodeURIComponent(user.email)}`, {
+                        method: 'PUT',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(user)
+                    });
+                }
+
                 document.body.style.cursor = 'wait';
                 setTimeout(function () {
                     window.location.href = 'index.html';
                     document.body.style.cursor = 'default';
                 }, 2000);
-                // window.location.href = 'index.html';
             } else {
                 errorDiv.textContent = errorMessage;
                 errorDiv.style.display = 'block';
                 errorDiv.style.marginBottom = '1.2em';
             }
-        })
-        .catch(() => {
-            errorDiv.textContent = 'Unable to connect to server.';
-            errorDiv.style.display = 'block';
-            errorDiv.style.marginBottom = '1.2em';
         });
-    });
-
     </script>
     <script src="include-header.js"></script>
 </body>

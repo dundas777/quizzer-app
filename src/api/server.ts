@@ -66,15 +66,14 @@ app.get('/api/subjects', (req: Request, res: Response) => {
 //              Users
 // ------------------------------------
 
-// e.g. http://localhost:5000/api/users/john.smith@test.com/Password123!
-app.get('/api/users/:email/:password', (req: Request, res: Response) => {
-  const { email, password } = req.params;
+app.post('/api/login', (req: Request, res: Response) => {
+  const { email, password } = req.body;
   if (!email || !password) {
     return res.status(400).json({ error: 'Email and password are required.' });
   }
 
   const userController = new UserController();
-  const users = userController.getUser(email, password);
+  const users = userController.login(email, password);
   if (!users || users.length === 0) {
     return res.status(401).json({ error: 'Unauthorized' });
   }
@@ -88,7 +87,7 @@ app.get('/api/users/:email', (req: Request, res: Response) => {
   }
 
   const userController = new UserController();
-  const user = userController.getUserByEmail(email);
+  const user = userController.getUser(email);
   if (!user) {
     return res.status(401).json({ error: 'Unauthorized' });
   }

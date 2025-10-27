@@ -242,6 +242,12 @@
                 <input type="checkbox" id="isAdmin" />
                 <br />
             </div>
+            <div style="margin-bottom: 1.2em;">
+                <label for="failedLoginAttempts" style="display: inline-block; width: 120px;">Failed logins:</label>
+                <input type="text" id="failedLoginAttempts" style="display: inline-block; width: 50px;" readonly />
+                <button id="reset-failed-logins-button" type="button" class="smallButton">Reset</button>
+                <br />
+            </div>
             <br />
             <button id="save-button" type="submit" class="button">Save</button>
             <button id="cancel-button" type="button" class="linkButtonLight">Cancel</button>
@@ -287,11 +293,17 @@
                 const countrySelect = document.getElementById('country');
                 if (countrySelect) countrySelect.value = user.country;
                 document.getElementById('isAdmin').checked = user.isAdmin;
+                document.getElementById('failedLoginAttempts').value = user.failedLogins;
             });
 
         // cancel button handler
         document.getElementById('cancel-button').addEventListener('click', function(e) {
             window.location.href = 'admin-user-list.html';
+        });
+
+        // reset failed logins button handler
+        document.getElementById('reset-failed-logins-button').addEventListener('click', function(e) {
+            document.getElementById('failedLoginAttempts').value = 0;
         });
 
         // submit button handler to save data

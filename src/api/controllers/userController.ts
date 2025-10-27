@@ -3,20 +3,20 @@ import { User } from '../../domain/types/user';
 
 export class UserController {
 
-    public getUserByEmail(email: string): User | undefined {
-        console.log(`Fetching user with email: ${email}`);
-        if (!email) {
-            throw new Error("Invalid email");
-        }
-        return userData.find(u => u.email === email);
-    }
-
-    public getUser(email: string, password: string): User[] {
+    public login(email: string, password: string): User[] {
         console.log(`Fetching user with email and password: ${email} and password: ${password}`);
         if (email === 'all') {
             return userData;
         }
         return userData.filter(q => q.email === email && q.password === password);
+    }
+
+    public getUser(email: string): User | undefined {
+        // console.log(`Fetching user with email: ${email}`);
+        if (!email) {
+            throw new Error("Invalid email");
+        }
+        return userData.find(u => u.email === email);
     }
 
     public addUser(user: User): void {
@@ -41,7 +41,7 @@ export class UserController {
     }
 
     public deleteUser(email: string): void {
-        console.log(`Deleting user with email: ${email}`);
+        // console.log(`Deleting user with email: ${email}`);
         if (!email) {
             throw new Error("A valid email must be provided for deletion");
         }
