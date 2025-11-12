@@ -1050,5 +1050,560 @@ export const questionData: Question[] = [
         question: "Which organ system is responsible for hormone production?",
         answers: ["Nervous system", "Digestive system", "Endocrine system", "Circulatory system"],
         correctAnswerIdx: 2
-    }
+    },
+    {
+        id: 151,
+        subject: "playwright",
+        question: "What language is most commonly used with Playwright Test?",
+        answers: ["Python", "TypeScript", "Ruby", "PHP"],
+        correctAnswerIdx: 1
+    },
+    {
+        id: 152,
+        subject: "playwright",
+        question: "Which command is used to run Playwright tests from the terminal?",
+        answers: ["npx playwright run", "npx playwright test", "npm run playwright", "node playwright.js"],
+        correctAnswerIdx: 1
+    },
+    {
+        id: 153,
+        subject: "playwright",
+        question: "Which browsers does Playwright officially support?",
+        answers: ["Chrome, Firefox, Safari, Edge", "Only Chrome", "Only Chromium", "Only WebKit"],
+        correctAnswerIdx: 0
+    },
+    {
+        id: 154,
+        subject: "playwright",
+        question: "Which Playwright method is used to launch a browser?",
+        answers: ["playwright.launchBrowser()", "browser.start()", "chromium.launch()", "page.newBrowser()"],
+        correctAnswerIdx: 2
+    },
+    {
+        id: 155,
+        subject: "playwright",
+        question: "What does the Playwright `page` object represent?",
+        answers: ["A tab or window in a browser context", "A DOM element", "The Playwright configuration file", "The entire browser instance"],
+        correctAnswerIdx: 0
+    },
+    {
+        id: 156,
+        subject: "playwright",
+        question: "Which configuration file does Playwright use by default?",
+        answers: ["playwright.config.ts", "playwright.json", "test.config.js", "package.json"],
+        correctAnswerIdx: 0
+    },
+    {
+        id: 157,
+        subject: "playwright",
+        question: "Which of the following is true about Playwright fixtures?",
+        answers: ["They provide reusable test setup and teardown", "They are used to generate HTML reports", "They are for mocking network requests", "They are only available in Python"],
+        correctAnswerIdx: 0
+    },
+    {
+        id: 158,
+        subject: "playwright",
+        question: "Which of these commands installs Playwright and its browsers?",
+        answers: ["npm install playwright", "npm init playwright@latest", "npm install @playwright/test", "npm install playwright && npx playwright install"],
+        correctAnswerIdx: 3
+    },
+    {
+        id: 159,
+        subject: "playwright",
+        question: "Which assertion library is built into Playwright Test?",
+        answers: ["Chai", "Jest Expect", "Playwright Test Assertions", "Mocha"],
+        correctAnswerIdx: 2
+    },
+    {
+        id: 160,
+        subject: "playwright",
+        question: "Which command opens the Playwright Test UI mode?",
+        answers: ["npx playwright ui", "npx playwright test --ui", "npx playwright inspector", "npx playwright show"],
+        correctAnswerIdx: 1
+    },
+    {
+        id: 161,
+        subject: "playwright",
+        question: "What is the default timeout for Playwright test actions?",
+        answers: ["5 seconds", "10 seconds", "30 seconds", "60 seconds"],
+        correctAnswerIdx: 2
+    },
+    {
+        id: 162,
+        subject: "playwright",
+        question: "How can you record a new Playwright test interactively?",
+        answers: ["npx playwright codegen", "npx playwright test record", "npx playwright inspector", "npx playwright trace record"],
+        correctAnswerIdx: 0
+    },
+    {
+        id: 163,
+        subject: "playwright",
+        question: "What does `page.goto(url)` do?",
+        answers: ["Opens a new tab", "Navigates the current page to the given URL", "Closes the browser", "Reloads the browser context"],
+        correctAnswerIdx: 1
+    },
+    {
+        id: 164,
+        subject: "playwright",
+        question: "Which locator strategy is preferred in Playwright for finding elements?",
+        answers: ["CSS selectors only", "XPath", "data-testid attributes and role-based locators", "Manual DOM traversal"],
+        correctAnswerIdx: 2
+    },
+    {
+        id: 165,
+        subject: "playwright",
+        question: "What is the purpose of `expect(page).toHaveURL()`?",
+        answers: ["Verifies an element is visible", "Checks that the current page URL matches a value", "Confirms page has loaded fully", "Waits for network idle"],
+        correctAnswerIdx: 1
+    },
+    {
+        id: 166,
+        subject: "playwright",
+        question: "Which command generates an HTML report for Playwright tests?",
+        answers: ["npx playwright show-report", "npx playwright report", "npx playwright test --reporter=html", "npx playwright html-report"],
+        correctAnswerIdx: 2
+    },
+    {
+        id: 167,
+        subject: "playwright",
+        question: "What is a Playwright 'trace' used for?",
+        answers: ["Tracking browser performance", "Debugging failed tests with recordings of actions", "Monitoring CPU usage", "Logging console output only"],
+        correctAnswerIdx: 1
+    },
+    {
+        id: 168,
+        subject: "playwright",
+        question: "How can you capture a screenshot in Playwright?",
+        answers: ["page.saveScreenshot()", "page.screenshot()", "browser.capture()", "context.screenshot()"],
+        correctAnswerIdx: 1
+    },
+    {
+        id: 169,
+        subject: "playwright",
+        question: "Which Playwright API handles network request interception?",
+        answers: ["page.on('request')", "page.intercept()", "page.route()", "browser.blockNetwork()"],
+        correctAnswerIdx: 2
+    },
+    {
+        id: 170,
+        subject: "playwright",
+        question: "What command is used to record a trace?",
+        answers: ["npx playwright trace start", "npx playwright test --trace on", "npx playwright record-trace", "npx playwright debug --trace"],
+        correctAnswerIdx: 1
+    },
+    {
+        id: 171,
+        subject: "playwright",
+        question: "Which environment variable can control headed vs headless mode?",
+        answers: ["PWDEBUG", "HEADLESS", "PLAYWRIGHT_MODE", "DEBUG"],
+        correctAnswerIdx: 0
+    },
+    {
+        id: 172,
+        subject: "playwright",
+        question: "Which configuration option in Playwright specifies parallel test workers?",
+        answers: ["maxWorkers", "workers", "parallel", "instances"],
+        correctAnswerIdx: 1
+    },
+    {
+        id: 173,
+        subject: "playwright",
+        question: "What is the difference between `browserContext` and `page`?",
+        answers: ["A context holds multiple pages and isolated sessions", "They are the same", "Page is used for storage", "Context represents a browser tab"],
+        correctAnswerIdx: 0
+    },
+    {
+        id: 174,
+        subject: "playwright",
+        question: "What Playwright method is used to emulate devices like iPhone 12?",
+        answers: ["context.setDevice()", "playwright.devices", "page.emulate()", "browser.useDevice()"],
+        correctAnswerIdx: 1
+    },
+    {
+        id: 175,
+        subject: "playwright",
+        question: "Which file format is Playwright trace files saved as?",
+        answers: [".json", ".zip", ".trace", ".html"],
+        correctAnswerIdx: 1
+    },
+    {
+        id: 176,
+        subject: "playwright",
+        question: "How do you wait for a selector to appear in Playwright?",
+        answers: ["page.waitForSelector()", "page.expectSelector()", "page.sleep()", "page.awaitElement()"],
+        correctAnswerIdx: 0
+    },
+    {
+        id: 177,
+        subject: "playwright",
+        question: "What does the `--headed` flag do when running tests?",
+        answers: ["Runs browser with visible UI", "Runs faster", "Skips animations", "Runs tests only on Chrome"],
+        correctAnswerIdx: 0
+    },
+    {
+        id: 178,
+        subject: "playwright",
+        question: "What’s the default directory where Playwright looks for tests?",
+        answers: ["tests/", "src/tests", "e2e/", "__tests__/"],
+        correctAnswerIdx: 0
+    },
+    {
+        id: 179,
+        subject: "playwright",
+        question: "Which Playwright command installs browser dependencies on Linux?",
+        answers: ["npx playwright install-deps", "npx playwright deps", "sudo apt install playwright", "npx playwright setup-linux"],
+        correctAnswerIdx: 0
+    },
+    {
+        id: 180,
+        subject: "playwright",
+        question: "What function is used to hover over an element?",
+        answers: ["page.hover()", "page.mouseOver()", "page.triggerHover()", "page.focusHover()"],
+        correctAnswerIdx: 0
+    },
+    {
+        id: 181,
+        subject: "playwright",
+        question: "How can you run tests in a specific browser using CLI?",
+        answers: ["--browser=chromium", "--useBrowser=chrome", "--run-on=firefox", "--engine=webkit"],
+        correctAnswerIdx: 0
+    },
+    {
+        id: 182,
+        subject: "playwright",
+        question: "Which Playwright object allows video recording of tests?",
+        answers: ["context", "page", "browser", "recorder"],
+        correctAnswerIdx: 0
+    },
+    {
+        id: 183,
+        subject: "playwright",
+        question: "Which command opens the trace viewer?",
+        answers: ["npx playwright show-trace", "npx playwright trace open trace.zip", "npx playwright trace-view", "npx playwright report trace"],
+        correctAnswerIdx: 1
+    },
+    {
+        id: 184,
+        subject: "playwright",
+        question: "Which feature allows testing multiple browsers in one run?",
+        answers: ["Projects in playwright.config.ts", "MultiBrowser API", "Test matrix", "Browser loops"],
+        correctAnswerIdx: 0
+    },
+    {
+        id: 185,
+        subject: "playwright",
+        question: "What does the `--debug` flag do?",
+        answers: ["Opens the Playwright Inspector for step-by-step debugging", "Enables verbose logging only", "Disables timeouts", "Skips failed tests"],
+        correctAnswerIdx: 0
+    },
+    {
+        id: 186,
+        subject: "playwright",
+        question: "What’s the name of the test runner built into Playwright?",
+        answers: ["Playwright Test", "Playwright Runner", "PW CLI", "Jest for Playwright"],
+        correctAnswerIdx: 0
+    },
+    {
+        id: 187,
+        subject: "playwright",
+        question: "Which command can update browsers to the latest version?",
+        answers: ["npx playwright install", "npx playwright update", "npx playwright sync", "npm update playwright"],
+        correctAnswerIdx: 0
+    },
+    {
+        id: 188,
+        subject: "playwright",
+        question: "How do you skip a test in Playwright?",
+        answers: ["test.skip()", "test.ignore()", "test.omit()", "test.disable()"],
+        correctAnswerIdx: 0
+    },
+    {
+        id: 189,
+        subject: "playwright",
+        question: "Which Playwright command shows available browsers and versions?",
+        answers: ["npx playwright --version", "npx playwright install --list", "npx playwright browsers", "npx playwright show"],
+        correctAnswerIdx: 1
+    },
+    {
+        id: 190,
+        subject: "playwright",
+        question: "Which built-in reporter shows test progress in the terminal?",
+        answers: ["dot", "list", "json", "html"],
+        correctAnswerIdx: 1
+    },
+  {
+    id: 191,
+    subject: "playwright",
+    question: "What’s the recommended way to reuse authentication across tests?",
+    answers: ["Local cookies", "Session caching", "Storage state files", "Environment variables"],
+    correctAnswerIdx: 2
+  },
+  {
+    id: 192,
+    subject: "playwright",
+    question: "Which file stores test output, traces, and screenshots by default?",
+    answers: ["output/", "artifacts/", "results/", "test-results/"],
+    correctAnswerIdx: 3
+  },
+  {
+    id: 193,
+    subject: "playwright",
+    question: "What’s the purpose of `await` in Playwright tests?",
+    answers: ["Parallelizes tests", "Ensures async actions complete before proceeding", "Runs code synchronously", "Skips failures"],
+    correctAnswerIdx: 1
+  },
+  {
+    id: 194,
+    subject: "playwright",
+    question: "Which method waits for a network response that matches a URL?",
+    answers: ["page.waitForNetwork()", "page.onResponse()", "context.waitForUrl()", "page.waitForResponse()"],
+    correctAnswerIdx: 3
+  },
+  {
+    id: 195,
+    subject: "playwright",
+    question: "Which config option enables test retries?",
+    answers: ["attempts", "retryCount", "maxAttempts", "retries"],
+    correctAnswerIdx: 3
+  },
+  {
+    id: 196,
+    subject: "playwright",
+    question: "How can you group tests in Playwright?",
+    answers: ["Using describe.only()", "Using test.describe()", "By folder name only", "Using group()"],
+    correctAnswerIdx: 1
+  },
+  {
+    id: 197,
+    subject: "playwright",
+    question: "What is Playwright’s default test timeout?",
+    answers: ["1 minute", "30 seconds", "5 seconds", "10 seconds"],
+    correctAnswerIdx: 1
+  },
+  {
+    id: 198,
+    subject: "playwright",
+    question: "Which of these can Playwright test besides web apps?",
+    answers: ["Only Chrome extensions", "APIs and mobile web in emulation", "Only desktop sites", "Only React apps"],
+    correctAnswerIdx: 1
+  },
+  {
+    id: 199,
+    subject: "playwright",
+    question: "Which Playwright feature allows running tests in parallel across browsers?",
+    answers: ["Pipelines", "Projects", "Threads", "Async loops"],
+    correctAnswerIdx: 1
+  },
+  {
+    id: 200,
+    subject: "playwright",
+    question: "Which command runs Playwright tests in headed mode for debugging?",
+    answers: ["npx playwright open", "npx playwright debug", "npx playwright test --headed", "npx playwright run headed"],
+    correctAnswerIdx: 2
+  },
+  {
+    id: 201,
+    subject: "playwright",
+    question: "How can you run Playwright tests in parallel on CI servers?",
+    answers: [
+      "By starting multiple Playwright projects manually",
+      "Using multiple workers configured in playwright.config.ts",
+      "By using setTimeout loops",
+      "Parallel testing is not supported"
+    ],
+    correctAnswerIdx: 1
+  },
+  {
+    id: 202,
+    subject: "playwright",
+    question: "Which Playwright feature allows running different browsers or devices under one config?",
+    answers: ["Contexts", "Projects", "Suites", "Pipelines"],
+    correctAnswerIdx: 1
+  },
+  {
+    id: 203,
+    subject: "playwright",
+    question: "What’s the recommended way to share setup across multiple test files?",
+    answers: ["Environment variables", "Global setup and teardown files", "Copy-paste beforeEach hooks", "Single test.describe block"],
+    correctAnswerIdx: 1
+  },
+  {
+    id: 204,
+    subject: "playwright",
+    question: "Which reporter format is best suited for CI/CD pipelines?",
+    answers: ["dot", "json", "list", "html"],
+    correctAnswerIdx: 0
+  },
+  {
+    id: 205,
+    subject: "playwright",
+    question: "What’s the default folder for storing screenshots, videos, and traces?",
+    answers: ["artifacts/", "output/", "screenshots/", "test-results/"],
+    correctAnswerIdx: 3
+  },
+  {
+    id: 206,
+    subject: "playwright",
+    question: "What is the purpose of the `storageState` property in a project configuration?",
+    answers: [
+      "It stores browser performance data",
+      "It enables headless mode",
+      "It reuses authenticated sessions between tests",
+      "It saves environment variables for the test run"
+    ],
+    correctAnswerIdx: 2
+  },
+  {
+    id: 207,
+    subject: "playwright",
+    question: "What is a recommended way to authenticate users for all tests?",
+    answers: [
+      "Run a global setup that signs in and saves storageState.json",
+      "Use browser context cookies only",
+      "Manually log in before each test",
+      "Use environment variables for credentials"
+    ],
+    correctAnswerIdx: 0
+  },
+  {
+    id: 208,
+    subject: "playwright",
+    question: "How can you run a subset of tests by title match?",
+    answers: [
+      "npx playwright test --title login",
+      "npx playwright filter login",
+      "npx playwright test -g 'login'",
+      "npx playwright run login"
+    ],
+    correctAnswerIdx: 2
+  },
+  {
+    id: 209,
+    subject: "playwright",
+    question: "Which Playwright feature helps capture network traffic during tests?",
+    answers: ["Traceroute", "Network logs", "HAR recording", "WebSocket capture"],
+    correctAnswerIdx: 2
+  },
+  {
+    id: 210,
+    subject: "playwright",
+    question: "How can you stub or mock an API response in Playwright?",
+    answers: [
+      "Disable network with context.offline()",
+      "Use page.route() to intercept and fulfill requests",
+      "Modify headers using page.setExtraHTTPHeaders()",
+      "Use fetch() mock scripts"
+    ],
+    correctAnswerIdx: 1
+  },
+  {
+    id: 211,
+    subject: "playwright",
+    question: "What’s the recommended way to debug flaky tests in CI?",
+    answers: [
+      "Enable trace collection on retries",
+      "Run all tests twice locally",
+      "Disable parallel mode",
+      "Add console.log to each step"
+    ],
+    correctAnswerIdx: 0
+  },
+  {
+    id: 212,
+    subject: "playwright",
+    question: "Which Playwright feature allows you to pause and inspect tests interactively?",
+    answers: ["Trace Viewer", "HAR Viewer", "Playwright Inspector", "Headed mode"],
+    correctAnswerIdx: 2
+  },
+  {
+    id: 213,
+    subject: "playwright",
+    question: "How can you run Playwright tests across multiple devices in a CI pipeline?",
+    answers: [
+      "Use environment variables per device",
+      "Run one test per browser only",
+      "Define multiple projects in playwright.config.ts using devices from playwright.devices",
+      "Use page.emulateDevice() manually in every test"
+    ],
+    correctAnswerIdx: 2
+  },
+  {
+    id: 214,
+    subject: "playwright",
+    question: "Which configuration option helps to automatically retry failed tests?",
+    answers: ["retryCount", "retries", "attempts", "rerun"],
+    correctAnswerIdx: 1
+  },
+  {
+    id: 215,
+    subject: "playwright",
+    question: "What’s the purpose of the `expect.poll()` function?",
+    answers: [
+      "Waits for a selector to appear",
+      "Polls for network requests",
+      "Repeatedly checks a value until it matches an expected result",
+      "Runs a test multiple times"
+    ],
+    correctAnswerIdx: 2
+  },
+  {
+    id: 216,
+    subject: "playwright",
+    question: "Which Playwright command integrates test reporting with GitHub Actions automatically?",
+    answers: [
+      "npx playwright github-report",
+      "npx playwright test --reporter=github",
+      "npx playwright test --ci",
+      "npx playwright ci"
+    ],
+    correctAnswerIdx: 1
+  },
+  {
+    id: 217,
+    subject: "playwright",
+    question: "What’s the advantage of using `test.step()` in Playwright tests?",
+    answers: [
+      "Improves trace readability by grouping related actions",
+      "Combines multiple tests into one",
+      "Retries failed steps automatically",
+      "Executes tests faster"
+    ],
+    correctAnswerIdx: 0
+  },
+  {
+    id: 218,
+    subject: "playwright",
+    question: "How can you test REST APIs using Playwright Test?",
+    answers: [
+      "Enable API mode in config",
+      "Attach a REST plugin",
+      "Use page.fetch() in browser",
+      "Use request.newContext() and context.get/post methods"
+    ],
+    correctAnswerIdx: 3
+  },
+  {
+    id: 219,
+    subject: "playwright",
+    question: "Which command can generate a Playwright configuration file interactively?",
+    answers: [
+      "npx playwright config",
+      "npm init playwright@latest",
+      "npx playwright setup",
+      "npx playwright init"
+    ],
+    correctAnswerIdx: 1
+  },
+  {
+    id: 220,
+    subject: "playwright",
+    question: "Which feature helps isolate tests to prevent shared state between them?",
+    answers: [
+      "Browser contexts per test",
+      "Parallel worker variables",
+      "Shared cookies",
+      "Single browser reuse"
+    ],
+    correctAnswerIdx: 0
+  }
 ];
