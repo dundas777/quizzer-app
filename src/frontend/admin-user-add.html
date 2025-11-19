@@ -33,6 +33,11 @@
                 <br />
             </div>
             <div style="margin-bottom: 1.2em;">
+                <label for="address" style="display: inline-block; width: 120px; vertical-align: top;">Address:</label>
+                <textarea id="address" name="address" rows="5" cols="30"></textarea>
+                <br>
+            </div>
+            <div style="margin-bottom: 1.2em;">
                 <label for="country" style="display: inline-block; width: 120px;">Country:</label>
                 <select id="country" name="country">
                     <option value="">-- Select Country --</option>
@@ -266,6 +271,7 @@
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
             const dateOfBirth = document.getElementById('dateOfBirth').value; // yyyy-MM-dd
+            const address = document.getElementById('address').value;
             const country = document.getElementById('country').value;
             const isAdmin = document.getElementById('isAdmin').checked;
             const failedLogins = 0;
@@ -283,6 +289,7 @@
                 email,
                 password,
                 dateOfBirth,
+                address,
                 country,
                 isAdmin,
                 failedLogins

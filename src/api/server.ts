@@ -80,6 +80,7 @@ app.post('/api/login', (req: Request, res: Response) => {
   res.json(users[0]);
 });
 
+// e.g. http://localhost:5000/api/users/john.smith@test.com
 app.get('/api/users/:email', (req: Request, res: Response) => {
   const { email } = req.params;
   if (!email) {

@@ -4,6 +4,7 @@ export interface User {
     email: string;
     password: string;
     dateOfBirth: Date;
+    address: string;
     country: string;
     isAdmin: boolean;
     failedLogins: number;

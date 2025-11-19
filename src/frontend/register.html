@@ -107,6 +107,10 @@
                 <input type="date" id="dateOfBirth" name="dateOfBirth"><br>
             </div>
             <div style="margin-bottom: 1.2em;">
+                <label for="address" style="display: inline-block; width: 120px; vertical-align: top;">Address:</label>
+                <textarea id="address" name="address" rows="5" cols="30"></textarea><br>
+            </div>
+            <div style="margin-bottom: 1.2em;">
                 <label for="country" style="display: inline-block; width: 120px;">Country:</label>
                 <select id="country" name="country">
                     <option value="">-- Select Country --</option>
@@ -340,8 +344,10 @@
             email: document.getElementById('email').value,
             password: document.getElementById('password').value,
             dateOfBirth: document.getElementById('dateOfBirth').value,
+            address: document.getElementById('address').value,
             country: document.getElementById('country').value,
-            isAdmin: false
+            isAdmin: false,
+            failedLogins: 0
         };
         localStorage.setItem('user', JSON.stringify(user));
         fetch('http://localhost:5000/api/users', {
