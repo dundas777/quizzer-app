@@ -95,6 +95,7 @@ app.get('/api/users/:email', (req: Request, res: Response) => {
   res.json(user);
 });
 
+// e.g. http://localhost:5000/api/users
 app.get('/api/users', (req: Request, res: Response) => {
   const userController = new UserController();
   const users = userController.getUsers();

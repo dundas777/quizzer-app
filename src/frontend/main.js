@@ -16,6 +16,9 @@ let quizIncorrectAnswer;
 let quizCorrectAnswer;
 let quizSubmitButton;
 let quizNextButton;
+let quizSelectCategory;
+let quizSelectNumber;
+let quizSelectAnswer;
 
 let scoreContainer;
 let restartButton;
@@ -33,6 +36,9 @@ document.addEventListener('DOMContentLoaded', () => {
     quizCorrectAnswer = document.getElementById('quiz-correct-answer');
     quizSubmitButton = document.getElementById('quiz-submit-button');
     quizNextButton = document.getElementById('quiz-next-button');
+    quizSelectCategory = document.getElementById('quiz-select-category');
+    quizSelectNumber = document.getElementById('quiz-select-number');
+    quizSelectAnswer = document.getElementById('quiz-select-answer');
 
     scoreContainer = document.getElementById('score-container');
     finalScore = document.getElementById('final-score');
@@ -40,6 +46,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     startQuizButton.addEventListener('click', () => {
         console.log('Start Quiz button clicked');
+        quizSelectCategory.style.display = 'none';
+        quizSelectNumber.style.display = 'none';
         let error = false;
 
         const selectedQuizOption = document.querySelector('input[name="category"]:checked');
@@ -48,16 +56,16 @@ document.addEventListener('DOMContentLoaded', () => {
             selectedQuiz = selectedQuizOption.value;
         } else {
             error = true;
-            alert('Please select a quiz category before proceeding.');
+            quizSelectCategory.style.display = 'block';
         }
 
-        const selectedNumberOption = document.querySelector('input[name="number"]:checked');
         let selectedNumber;
+        const selectedNumberOption = document.querySelector('input[name="number"]:checked');
         if (selectedNumberOption) {
             selectedNumber = selectedNumberOption.value;
         } else {
             error = true;
-            alert('Please select the number of questions to answer before proceeding.');
+            quizSelectNumber.style.display = 'block';
         }
 
         if (!error) {
@@ -140,11 +148,12 @@ function showQuestion() {
 
     // create action to check the answer
     quizSubmitButton.onclick = () => {
+        quizSelectAnswer.style.display = 'none';
         const selectedRadio = document.querySelector('input[name="answers"]:checked');
         if (selectedRadio) {
             checkAnswer(parseInt(selectedRadio.value, 10));
         } else {
-            alert('Please select an answer before proceeding.');
+            quizSelectAnswer.style.display = 'block';
         }
     };
 

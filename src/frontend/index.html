@@ -17,22 +17,25 @@
                 <input id="history" type="radio" name="category" value="history"><label for="history" class="radio-text">History</label><br>
                 <input id="science" type="radio" name="category" value="science"><label for="science" class="radio-text">Science</label><br>
                 <input id="playwright" type="radio" name="category" value="playwright"><label for="playwright" class="radio-text">Playwright</label><br>
+                <div id="quiz-select-category" style="display: none;"><br><span style="color: red;">Please select a quiz category before proceeding.</span></div>
             </div>
             <h2>Select how many questions to answer</h2>
             <div id="number-of-questions" class="option-list">
                 <input id="num3" type="radio" name="number" value="3"><label for="num3" class="radio-text">3</label><br>
                 <input id="num5" type="radio" name="number" value="5"><label for="num5" class="radio-text">5</label><br>
                 <input id="num10" type="radio" name="number" value="10"><label for="num10" class="radio-text">10</label><br>
+                <div id="quiz-select-number" style="display: none;"><br><span style="color: red;">Please select the number of questions to answer before proceeding.</span></div>
             </div>
-            <br>
             <button id="start-quiz" class="button">Start Quiz</button>
         </div>
         <div id="quiz-container" style="display: none;" class="container">
             <h2 id="quiz-question"></h2>
             <div id="quiz-answers"></div>
             <br>
-            <div id="quiz-correct-answer" style="color: green; display: none;">Correct!</div><br>
-            <div id="quiz-incorrect-answer" style="color: red; display: none;">Incorrect, try again!</div><br>
+            <div id="quiz-correct-answer" style="display: none;"><br><span style="color: green;">Correct!</span></div>
+            <div id="quiz-incorrect-answer" style="display: none;"><br><span style="color: red;">Incorrect, try again!</span></div>
+            <div id="quiz-select-answer" style="display: none;"><br><span style="color: red;">Please select an answer before proceeding.</span></div>
+            <br>
             <button id="quiz-submit-button" class="button">Submit</button>
             <button id="quiz-next-button" style="display: none;" class="button">Next</button>
         </div>
