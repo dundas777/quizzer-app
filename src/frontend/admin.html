@@ -4,17 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home - Quizzer Admin</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div id="header-placeholder"></div>
     <script src="admin-check.js"></script>
     <div id="category-container" class="container">
-    <h1>Quizzer Admin</h1>
-    <h2>Data Management</h2>
+    <h1 data-testid="admin-heading">Quizzer Admin</h1>
+    <h2 data-testid="data-management-heading">Data Management</h2>
     <ul>
-        <li><a href="admin-question-list.html">Edit quiz questions</a></li>
-        <li><a href="admin-user-list.html">Edit users</a></li>
+        <li><a href="admin-question-list.html" data-testid="edit-questions-link">Edit quiz questions</a></li>
+        <li><a href="admin-user-list.html" data-testid="edit-users-link">Edit users</a></li>
     </ul>
     </div>
     <script src="include-header.js"></script>

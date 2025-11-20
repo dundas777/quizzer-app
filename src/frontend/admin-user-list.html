@@ -4,19 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User List - Quizzer Admin</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div id="header-placeholder"></div>
     <div class="container">
-        <h1>Users</h1>
+        <h1 data-testid="user-list-heading">Users</h1>
         <p style="margin-bottom: 4.2em;">
-            <a href="admin-user-add.html" class="button right">Add User</a>
+            <a href="admin-user-add.html" class="button right" data-testid="add-user-button">Add User</a>
         </p>
         <p>
             <div id="user-list-content"></div>
         </p>
-        <a href="admin.html" class="button">Back</a>
+        <a href="admin.html" class="button" data-testid="back-button">Back</a>
     </div>
     <script src="admin-check.js"></script>
     <script type="module">
@@ -36,7 +37,7 @@
                     return;
                 }
                 
-                let html = '<table class="quizzer-table"><thead><tr>' +
+                let html = '<table class="quizzer-table" data-testid="user-list-table"><thead><tr>' +
                     '<th>First name</th><th>Last name</th><th>Email</th><th>Failed Logins</th><th>Admin?</th><th>Action</th></tr></thead><tbody>';
                 users.forEach(user => {
                     html += `<tr>

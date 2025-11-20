@@ -4,46 +4,47 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit User - Quizzer Admin</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div id="header-placeholder"></div>
     <div class="container">
-        <h1>Edit User</h1>
+        <h1 data-testid="edit-user-heading">Edit User</h1>
         <form id="edit-user-form" autocomplete="off">
             <div style="margin-bottom: 1.2em;">
                 <label for="firstName" style="display: inline-block; width: 120px;">First Name:</label>
-                <input type="text" id="firstName" style="display: inline-block; width: 400px;" required />
+                <input type="text" id="firstName" data-testid="first-name-input" style="display: inline-block; width: 400px;" required />
                 <br />
             </div>
             <div style="margin-bottom: 1.2em;">
                 <label for="lastName" style="display: inline-block; width: 120px;">Last Name:</label>
-                <input type="text" id="lastName" style="display: inline-block; width: 400px;" required />
+                <input type="text" id="lastName" data-testid="last-name-input" style="display: inline-block; width: 400px;" required />
                 <br />
             </div>
             <div style="margin-bottom: 1.2em;">
                 <label for="email" style="display: inline-block; width: 120px;">Email:</label>
-                <input type="email" id="email" placeholder="email address" autocomplete="edit-user-email" readonly>
+                <input type="email" id="email" data-testid="email-input" placeholder="email address" autocomplete="edit-user-email" readonly>
                 <br />
             </div>
             <div style="margin-bottom: 1.2em;">
                 <label for="password" style="display: inline-block; width: 120px;">Password:</label>
-                <input type="password" id="password" placeholder="password" autocomplete="edit-user-password" required>
+                <input type="password" id="password" data-testid="password-input" placeholder="password" autocomplete="edit-user-password" required>
                 <br />
             </div>
             <div style="margin-bottom: 1.2em;">
                 <label for="dateOfBirth" style="display: inline-block; width: 120px;">Date of Birth:</label>
-                <input type="date" id="dateOfBirth" />
+                <input type="date" id="dateOfBirth" data-testid="date-of-birth-input" />
                 <br />
             </div>
             <div style="margin-bottom: 1.2em;">
                 <label for="address" style="display: inline-block; width: 120px; vertical-align: top;">Address:</label>
-                <textarea id="address" name="address" rows="5" cols="30"></textarea>
+                <textarea id="address" name="address" rows="5" cols="30" data-testid="address-input"></textarea>
                 <br />
             </div>
             <div style="margin-bottom: 1.2em;">
                 <label for="country" style="display: inline-block; width: 120px;">Country:</label>
-                <select id="country" name="country">
+                <select id="country" name="country" data-testid="country-select">
                     <option value="">-- Select Country --</option>
                     <option value="Afghanistan">Afghanistan</option>
                     <option value="Albania">Albania</option>
@@ -244,18 +245,18 @@
             </div>
             <div style="margin-bottom: 1.2em;">
                 <label for="isAdmin" style="display: inline-block; width: 120px;">Is Admin?:</label>
-                <input type="checkbox" id="isAdmin" />
+                <input type="checkbox" id="isAdmin" data-testid="is-admin-checkbox" />
                 <br />
             </div>
             <div style="margin-bottom: 1.2em;">
                 <label for="failedLoginAttempts" style="display: inline-block; width: 120px;">Failed logins:</label>
-                <input type="text" id="failedLoginAttempts" style="display: inline-block; width: 50px;" readonly />
-                <button id="reset-failed-logins-button" type="button" class="smallButton">Reset</button>
+                <input type="text" id="failedLoginAttempts" data-testid="failed-login-attempts-input" style="display: inline-block; width: 50px;" readonly />
+                <button id="reset-failed-logins-button" type="button" class="smallButton" data-testid="reset-failed-logins-button">Reset</button>
                 <br />
             </div>
             <br />
-            <button id="save-button" type="submit" class="button">Save</button>
-            <button id="cancel-button" type="button" class="linkButtonLight">Cancel</button>
+            <button id="save-button" type="submit" class="button" data-testid="save-button">Save</button>
+            <button id="cancel-button" type="button" class="linkButtonLight" data-testid="cancel-button">Cancel</button>
             <br />
         </form>
     </div>

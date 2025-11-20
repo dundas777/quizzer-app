@@ -132,6 +132,7 @@ function showQuestion() {
     question.answers.forEach((option, index) => {
         const radio = document.createElement('input');
         radio.id = 'answer' + index;
+        radio.setAttribute('data-testid', 'answer-option-' + index);
         radio.type = 'radio';
         radio.name = 'answers';
         radio.value = index;

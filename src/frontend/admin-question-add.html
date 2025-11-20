@@ -4,55 +4,56 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Question - Quizzer Admin</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div id="header-placeholder"></div>
     <div class="container">
-        <h1>Add New Question</h1>
+        <h1 data-testid="add-question-heading">Add New Question</h1>
         <form id="add-question-form">
             <div style="margin-bottom: 1.2em;">
                 <label for="subjectSelect" style="display: inline-block; width: 120px;">Subject:</label>
-                <select id="subjectSelect">
+                <select id="subjectSelect" data-testid="subject-select" required>
                 </select>
                 <br />
             </div>
             <div style="margin-bottom: 1.2em;">
                 <label for="question" style="display: inline-block; width: 120px;">Question:</label>
-                <input type="text" id="question" style="display: inline-block; width: 400px;" required />
+                <input type="text" id="question" data-testid="question-input" style="display: inline-block; width: 400px;" required />
                 <br />
             </div>
             <div style="margin-bottom: 1.2em;">
-                <label for="password" style="display: inline-block; width: 120px;">Answer 1:</label>
-                <input type="text" id="answer1" name="password" required />
-                <input id="isAnswer1Correct" type="radio" name="isAnswerCorrect" required />
+                <label for="answer1" style="display: inline-block; width: 120px;">Answer 1:</label>
+                <input type="text" id="answer1" data-testid="answer1-input" name="answer1" required />
+                <input id="isAnswer1Correct" data-testid="is-answer1-correct-radio" type="radio" name="isAnswerCorrect" required />
                 <br />
             </div>
             <div style="margin-bottom: 1.2em;">
-                <label for="password" style="display: inline-block; width: 120px;">Answer 2:</label>
-                <input type="text" id="answer2" name="password" required />
-                <input id="isAnswer2Correct" type="radio" name="isAnswerCorrect" />
+                <label for="answer2" style="display: inline-block; width: 120px;">Answer 2:</label>
+                <input type="text" id="answer2" data-testid="answer2-input" name="answer2" required />
+                <input id="isAnswer2Correct" data-testid="is-answer2-correct-radio" type="radio" name="isAnswerCorrect" />
                 <br />
             </div>
             <div style="margin-bottom: 1.2em;">
-                <label for="password" style="display: inline-block; width: 120px;">Answer 3:</label>
-                <input type="text" id="answer3" name="password" required />
-                <input id="isAnswer3Correct" type="radio" name="isAnswerCorrect" />
+                <label for="answer3" style="display: inline-block; width: 120px;">Answer 3:</label>
+                <input type="text" id="answer3" data-testid="answer3-input" name="answer3" required />
+                <input id="isAnswer3Correct" data-testid="is-answer3-correct-radio" type="radio" name="isAnswerCorrect" />
                 <br />
             </div>
             <div style="margin-bottom: 1.2em;">
-                <label for="password" style="display: inline-block; width: 120px;">Answer 4:</label>
-                <input type="text" id="answer4" name="password" required />
-                <input id="isAnswer4Correct" type="radio" name="isAnswerCorrect" />
+                <label for="answer4" style="display: inline-block; width: 120px;">Answer 4:</label>
+                <input type="text" id="answer4" data-testid="answer4-input" name="answer4" required />
+                <input id="isAnswer4Correct" data-testid="is-answer4-correct-radio" type="radio" name="isAnswerCorrect" />
                 <br />
             </div>
             <div>
-                <input id="isAnswerCorrectGuide" type="radio" name="isAnswerCorrectGuide" />
+                <input id="isAnswerCorrectGuide" data-testid="isAnswerCorrectGuide-radio" type="radio" name="isAnswerCorrectGuide" />
                 <span style="font-size: 0.9em; color: gray;">(Select the radio button next to the correct answer)</span>
             </div>
             <br />
-            <button id="save-button" type="submit" class="button">Save</button>
-            <button id="cancel-button" type="button" class="linkButtonLight">Cancel</button>
+            <button id="save-button" type="submit" class="button" data-testid="save-button">Save</button>
+            <button id="cancel-button" type="button" class="linkButtonLight" data-testid="cancel-button">Cancel</button>
             <br />
         </form>
     </div>
@@ -77,6 +78,7 @@
                     const selectOption = document.createElement('option');
                     selectOption.value = subject;
                     selectOption.textContent = capitalise(subject);
+                    selectOption.setAttribute('data-testid', `${subject}-option`);
                     subjectSelect.appendChild(selectOption);
                 });
             });

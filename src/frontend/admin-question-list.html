@@ -4,24 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Question List - Quizzer Admin</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div id="header-placeholder"></div>
     <div class="container">
-        <h1>Quiz Questions</h1>
+        <h1 data-testid="questions-list-heading">Quiz Questions</h1>
         <p>
-            Subject: <select id="quiz-subject">
-                <option value="geography" selected>Geography</option>
-                <option value="history">History</option>
-                <option value="science">Science</option>
+            Subject: <select id="quiz-subject" data-testid="quiz-subject-select">
+                <option value="geography" data-testid="geography-radio" selected>Geography</option>
+                <option value="history" data-testid="history-radio">History</option>
+                <option value="science" data-testid="science-radio">Science</option>
+                <option value="playwright" data-testid="playwright-radio">Playwright</option>
             </select>
-            <a href="admin-question-add.html" class="button right">Add Question</a>
+            <a href="admin-question-add.html" data-testid="add-question-button" class="button right">Add Question</a>
         </p>
         <p>
-            <div id="question-list-content"></div>
+            <div id="question-list-content" data-testid="question-list-content"></div>
         </p>
-        <a href="admin.html" class="button">Back</a>
+        <a href="admin.html" class="button" data-testid="back-button">Back</a>
     </div>
     <script src="admin-check.js"></script>
     <script type="module">
@@ -42,7 +44,7 @@
                     return;
                 }
 
-                let html = '<table class="quizzer-table"><thead><tr>' +
+                let html = '<table class="quizzer-table" id="questions-table" data-testid="questions-table"><thead><tr>' +
                     '<th>Id</th><th>Subject</th><th>Question</th><th>Answer</th><th>Action</th></tr></thead><tbody>';
                 questions.forEach(question => {
                     html += `<tr>

@@ -113,6 +113,7 @@ app.post('/api/users', (req: Request, res: Response) => {
   res.status(201).json({ message: 'User added successfully.' }); 
 });
 
+// update user details
 app.put('/api/users/:email', (req: Request, res: Response) => {
   const userController = new UserController();
   const user = req.body;

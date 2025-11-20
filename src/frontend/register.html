@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register - Quizzer</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -13,31 +14,31 @@
         <form id="register-form">
             <div style="margin-bottom: 1.2em;">
                 <label for="firstName" style="display: inline-block; width: 120px;">First Name:</label>
-                <input type="text" id="firstName" name="firstName" required><sup>*</sup><br>
+                <input type="text" id="firstName" data-testid="first-name" name="firstName" required><sup>*</sup><br>
             </div>
             <div style="margin-bottom: 1.2em;">
                 <label for="lastName" style="display: inline-block; width: 120px;">Last Name:</label>
-                <input type="text" id="lastName" name="lastName" required><sup>*</sup><br>
+                <input type="text" id="lastName" data-testid="last-name" name="lastName" required><sup>*</sup><br>
             </div>
             <div style="margin-bottom: 1.2em;">
                 <label for="email" style="display: inline-block; width: 120px;">Email:</label>
-                <input type="email" id="email" name="email" autocomplete="new-password" required><sup>*</sup><br>
+                <input type="email" id="email" data-testid="email" name="email" autocomplete="new-password" required><sup>*</sup><br>
             </div>
             <div style="margin-bottom: 1.2em;">
                 <label for="password" style="display: inline-block; width: 120px;">Password:</label>
-                <input type="password" id="password" name="password" autocomplete="new-password" required><sup>*</sup><br>
+                <input type="password" id="password" data-testid="password" name="password" autocomplete="new-password" required><sup>*</sup><br>
             </div>
             <div style="margin-bottom: 1.2em;">
                 <label for="dateOfBirth" style="display: inline-block; width: 120px;">Date of Birth:</label>
-                <input type="date" id="dateOfBirth" name="dateOfBirth"><br>
+                <input type="date" id="dateOfBirth" data-testid="date-of-birth" name="dateOfBirth"><br>
             </div>
             <div style="margin-bottom: 1.2em;">
                 <label for="address" style="display: inline-block; width: 120px; vertical-align: top;">Address:</label>
-                <textarea id="address" name="address" rows="5" cols="30"></textarea><br>
+                <textarea id="address" data-testid="address" name="address" rows="5" cols="30"></textarea><br>
             </div>
             <div style="margin-bottom: 1.2em;">
                 <label for="country" style="display: inline-block; width: 120px;">Country:</label>
-                <select id="country" name="country">
+                <select id="country" data-testid="country" name="country">
                     <option value="">-- Select Country --</option>
                     <option value="Afghanistan">Afghanistan</option>
                     <option value="Albania">Albania</option>
@@ -236,21 +237,21 @@
                 </select><br>
         </div>
             <div><sup>*</sup> = Required Field</div><br>
-            <button type="submit" class="button">Register</button>
+            <button type="submit" data-testid="register-button" class="button">Register</button>
         </form>
-        <div id="register-error" class="error-message" style="display: none;"></div>
+        <div id="register-error" data-testid="register-error" class="error-message" style="display: none;"></div>
     </div>
 
     <!-- Promo Interstitial Overlay -->
-    <div id="promo-overlay">
-        <div id="promo-panel">
-            <h2>🎉 Special Offer! 🎉</h2>
+    <div id="promo-overlay" data-testid="promo-overlay" style="display: none;">
+        <div id="promo-panel" data-testid="promo-panel">
+            <h2 data-testid="promo-heading">🎉 Special Offer! 🎉</h2>
             <p>Congratulations! As a valued new member, you're eligible for an exclusive discount.</p>
             <div class="promo-highlight">50% OFF</div>
             <p>Get half off your first year of Quizzer Premium! Unlock unlimited quizzes, advanced analytics, and ad-free learning.</p>
             <div class="promo-buttons">
-                <button class="promo-button promo-button-primary" onclick="window.location.href='promo.html'">Tell me more</button>
-                <button class="promo-button promo-button-secondary" onclick="window.location.href='index.html'">Not interested</button>
+                <button class="promo-button promo-button-primary" data-testid="promo-button-primary" onclick="window.location.href='promo.html'">Tell me more</button>
+                <button class="promo-button promo-button-secondary" data-testid="promo-button-secondary" onclick="window.location.href='index.html'">Not interested</button>
             </div>
         </div>
     </div>

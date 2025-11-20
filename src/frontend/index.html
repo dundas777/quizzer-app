@@ -4,44 +4,45 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quizzer - Multiple Choice Quiz</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div id="app">
         <div id="header-placeholder"></div>
-        <div id="category-container" class="container">
-            <h1>Welcome to the Quiz!</h1>
-            <h2>Select a category</h2>
+        <div id="category-container" data-testid="category-container" class="container">
+            <h1 data-testid="home-welcome-heading">Welcome to the Quiz!</h1>
+            <h2 data-testid="category-heading">Select a category</h2>
             <div id="quiz-category" class="option-list">
-                <input id="geography" type="radio" name="category" value="geography"><label for="geography" class="radio-text">Geography</label><br>
-                <input id="history" type="radio" name="category" value="history"><label for="history" class="radio-text">History</label><br>
-                <input id="science" type="radio" name="category" value="science"><label for="science" class="radio-text">Science</label><br>
-                <input id="playwright" type="radio" name="category" value="playwright"><label for="playwright" class="radio-text">Playwright</label><br>
-                <div id="quiz-select-category" style="display: none;"><br><span style="color: red;">Please select a quiz category before proceeding.</span></div>
+                <input id="geography" data-testid="geography-radio" type="radio" name="category" value="geography"><label for="geography" class="radio-text">Geography</label><br>
+                <input id="history" data-testid="history-radio" type="radio" name="category" value="history"><label for="history" class="radio-text">History</label><br>
+                <input id="science" data-testid="science-radio" type="radio" name="category" value="science"><label for="science" class="radio-text">Science</label><br>
+                <input id="playwright" data-testid="playwright-radio" type="radio" name="category" value="playwright"><label for="playwright" class="radio-text">Playwright</label><br>
+                <div id="quiz-select-category" data-testid="select-category-error" style="display: none;"><br><span style="color: red;">Please select a quiz category before proceeding.</span></div>
             </div>
-            <h2>Select how many questions to answer</h2>
+            <h2 data-testid="number-heading">Select how many questions to answer</h2>
             <div id="number-of-questions" class="option-list">
-                <input id="num3" type="radio" name="number" value="3"><label for="num3" class="radio-text">3</label><br>
-                <input id="num5" type="radio" name="number" value="5"><label for="num5" class="radio-text">5</label><br>
-                <input id="num10" type="radio" name="number" value="10"><label for="num10" class="radio-text">10</label><br>
-                <div id="quiz-select-number" style="display: none;"><br><span style="color: red;">Please select the number of questions to answer before proceeding.</span></div>
+                <input id="num3" data-testid="num3-radio" type="radio" name="number" value="3"><label for="num3" class="radio-text">3</label><br>
+                <input id="num5" data-testid="num5-radio" type="radio" name="number" value="5"><label for="num5" class="radio-text">5</label><br>
+                <input id="num10" data-testid="num10-radio" type="radio" name="number" value="10"><label for="num10" class="radio-text">10</label><br>
+                <div id="quiz-select-number" data-testid="select-number-error" style="display: none;"><br><span style="color: red;">Please select the number of questions to answer before proceeding.</span></div>
             </div>
-            <button id="start-quiz" class="button">Start Quiz</button>
+            <button id="start-quiz" data-testid="start-quiz-button" class="button">Start Quiz</button>
         </div>
-        <div id="quiz-container" style="display: none;" class="container">
-            <h2 id="quiz-question"></h2>
-            <div id="quiz-answers"></div>
+        <div id="quiz-container" data-testid="quiz-container" style="display: none;" class="container">
+            <h2 id="quiz-question" data-testid="quiz-question-heading"></h2>
+            <div id="quiz-answers" data-testid="quiz-answers-list"></div>
             <br>
-            <div id="quiz-correct-answer" style="display: none;"><br><span style="color: green;">Correct!</span></div>
-            <div id="quiz-incorrect-answer" style="display: none;"><br><span style="color: red;">Incorrect, try again!</span></div>
-            <div id="quiz-select-answer" style="display: none;"><br><span style="color: red;">Please select an answer before proceeding.</span></div>
+            <div id="quiz-correct-answer" data-testid="quiz-correct-answer" style="display: none;"><br><span style="color: green;">Correct!</span></div>
+            <div id="quiz-incorrect-answer" data-testid="quiz-incorrect-answer" style="display: none;"><br><span style="color: red;">Incorrect, try again!</span></div>
+            <div id="quiz-select-answer" data-testid="quiz-select-answer-error" style="display: none;"><br><span style="color: red;">Please select an answer before proceeding.</span></div>
             <br>
-            <button id="quiz-submit-button" class="button">Submit</button>
-            <button id="quiz-next-button" style="display: none;" class="button">Next</button>
+            <button id="quiz-submit-button" data-testid="quiz-submit-button" class="button">Submit</button>
+            <button id="quiz-next-button" data-testid="quiz-next-button" style="display: none;" class="button">Next</button>
         </div>
         <div id="score-container" style="display: none;" class="container">
-            <h2>Your Final Score: <span id="final-score"></span></h2>
-            <button id="restart-button" class="button">Restart Quiz</button>
+            <h2 data-testid="final-score-heading">Your Final Score: <span id="final-score"></span></h2>
+            <button id="restart-button" data-testid="restart-button" class="button">Restart Quiz</button>
         </div>
     </div>
     <script src="main.js" type="module"></script>
