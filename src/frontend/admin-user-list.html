@@ -30,7 +30,6 @@
             try {
                 const response = await fetch(usersApiEndpoint);
                 const users = await response.json();
-                console.log('Fetched users:', users.length);
 
                 if (users.length === 0) {
                     userListContent.innerHTML = '<p>No users found</p>';

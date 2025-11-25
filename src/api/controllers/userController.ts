@@ -4,7 +4,7 @@ import { User } from '../../domain/types/user';
 export class UserController {
 
     public login(email: string, password: string): User[] {
-        console.log(`Fetching user with email and password: ${email} and password: ${password}`);
+        //console.log(`Fetching user with email and password: ${email} and password: ${password}`);
         if (email === 'all') {
             return userData;
         }

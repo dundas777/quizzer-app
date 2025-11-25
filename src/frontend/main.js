@@ -45,7 +45,6 @@ document.addEventListener('DOMContentLoaded', () => {
     restartButton = document.getElementById('restart-button');
 
     startQuizButton.addEventListener('click', () => {
-        console.log('Start Quiz button clicked');
         quizSelectCategory.style.display = 'none';
         quizSelectNumber.style.display = 'none';
         let error = false;
@@ -82,16 +81,12 @@ document.addEventListener('DOMContentLoaded', () => {
 function fetchQuestions(category, numberOfQuestions) {
     document.body.style.cursor = 'wait';
 
-    console.log('fetchQuestions() called', questions);
-
     setTimeout(function () {
         currentCategory = category;
         fetch(`${questionsApiEndpoint}?subject=${category}&numberOfQuestions=${numberOfQuestions}`)
             .then(response => response.json())
             .then(data => {
-                console.log('Data received from API');
                 questions = getRandomQuestions(data, numberOfQuestions);
-                console.log('Fetched questions:', questions.length);
                 currentQuestionIndex = 0;
                 score = 0;
                 showQuestion();
@@ -230,7 +225,7 @@ function showScore() {
             return response.json();
         })
         .then(data => {
-            console.log('Score successfully saved to API:', data);
+            // console.log('Score successfully saved to API:', data);
         })
         .catch(error => {
             console.error('There was a problem with the fetch operation:', error);

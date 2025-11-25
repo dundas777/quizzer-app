@@ -32,7 +32,6 @@ app.get('/api/questions', (req: Request, res: Response) => {
 app.get('/api/questions/:id', (req: Request, res: Response) => {
   const questionController = new QuestionController();
   const { id } = req.params; // id is a string | undefined
-  console.log('id param:', id);
   const questionId = parseInt(id, 10);
   res.json(questionController.getQuestion(questionId));
 });
